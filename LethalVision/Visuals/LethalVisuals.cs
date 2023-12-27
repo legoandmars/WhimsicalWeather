@@ -4,6 +4,7 @@ using System.Text;
 using UnityEngine.Rendering.HighDefinition;
 using UnityEngine;
 using System.Linq;
+using LethalVision.PostProcessing;
 
 namespace LethalVision.Visuals
 {
@@ -147,22 +148,22 @@ namespace LethalVision.Visuals
             customPass.enabled = false;
         }
 
-        private FullScreenCustomPass? GetCustomPass(Camera camera)
+        private LethalVisionPass? GetCustomPass(Camera camera)
         {
             if (_customPassVolume != null)
             {
                 // may break when null idk
-                return _customPassVolume.customPasses.Where(x => x is FullScreenCustomPass).FirstOrDefault() as FullScreenCustomPass;
+                return _customPassVolume.customPasses.Where(x => x is LethalVisionPass customPass).FirstOrDefault() as LethalVisionPass;
             }
 
             _customPassVolume = FindObjectOfType<CustomPassVolume>();
             if (_customPassVolume == null) return null;
 
-            var fullscreenPass = _customPassVolume.AddPassOfType<FullScreenCustomPass>() as FullScreenCustomPass;
-            fullscreenPass.fullscreenPassMaterial = Plugin.PassMaterial;
-            fullscreenPass.enabled = false;
+            var pass = _customPassVolume.AddPassOfType<LethalVisionPass>() as LethalVisionPass;
+            pass.enabled = false;
+
             _customPassVolume.customPasses.Reverse();
-            return fullscreenPass;
+            return pass;
         }
     }
 }
