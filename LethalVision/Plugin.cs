@@ -11,6 +11,8 @@ namespace LethalVision
     public class Plugin : BaseUnityPlugin
     {
         public static Material PassMaterial;
+        public static Shader RainbowTextShader;
+        public static Shader RainbowUIShader;
         public static GameObject VisualsObject;
 
         private LethalVisuals _visuals;
@@ -19,8 +21,10 @@ namespace LethalVision
         {
             // Plugin startup logic
             Logger.LogInfo($"Plugin {MyPluginInfo.PLUGIN_GUID} is loaded!");
-            PassMaterial = GetShader();
             VisualsObject = GetVisuals();
+            PassMaterial = GetPrefabMaterialFromName("PassShader");
+            RainbowTextShader = GetPrefabMaterialFromName("TextShader").shader;
+            RainbowUIShader = GetPrefabMaterialFromName("UIShader").shader;
 
             Harmony.CreateAndPatchAll(Assembly.GetExecutingAssembly());
 
@@ -28,15 +32,6 @@ namespace LethalVision
             visualsObject.hideFlags = HideFlags.HideAndDontSave;
             _visuals = visualsObject.AddComponent<LethalVisuals>();
             _visuals.SetAudio(VisualsObject.transform.Find("SparkleAudio").GetComponent<AudioSource>().clip);
-        }
-
-        private Material GetShader()
-        {
-            var bundlePath = Path.Join(Path.GetDirectoryName(this.Info.Location), "fullscreen_okhsl");
-            var bundle = AssetBundle.LoadFromFile(bundlePath);
-            var asset = bundle.LoadAsset<Material>("assets/shaders/fullscreen_okhsl.mat");
-
-            return asset;
         }
 
         private GameObject GetVisuals()
@@ -48,5 +43,9 @@ namespace LethalVision
             return asset;
         }
 
+        private Material GetPrefabMaterialFromName(string name)
+        {
+            return VisualsObject.transform.Find(name).GetComponent<MeshRenderer>().sharedMaterial;
+        }
     }
 }

@@ -6,6 +6,8 @@ using System.Text;
 using UnityEngine.Rendering.HighDefinition;
 using UnityEngine;
 using TMPro;
+using System.Linq;
+using UnityEngine.UI;
 
 namespace LethalVision.Patches
 {
@@ -37,11 +39,47 @@ namespace LethalVision.Patches
             }
 
             TextMeshProUGUI[] texts = Resources.FindObjectsOfTypeAll(typeof(TextMeshProUGUI)) as TextMeshProUGUI[];
-            foreach(var text in texts)
+            var materials = texts.Select(x => x.fontSharedMaterial).Distinct();
+            foreach(var material in materials)
             {
-                Debug.Log(text.fontMaterial.shader.name);
+                if (material.shader.name == "TextMeshPro/Distance Field")
+                {
+                    material.shader = Plugin.RainbowTextShader;
+                    Debug.Log("Replacing.");
+                }
+            }
+        }
+
+        private List<string> _whiteListedSpritesRainbowUI = new()
+        {
+            "DialogueBox1Frame 2",
+            "SprintMeter"
+        };
+
+        private void Rainbowify()
+        {
+            TextMeshProUGUI[] texts = Resources.FindObjectsOfTypeAll(typeof(TextMeshProUGUI)) as TextMeshProUGUI[];
+            var materials = texts.Select(x => x.fontSharedMaterial).Distinct();
+            foreach (var material in materials)
+            {
+                if (material.shader.name == "TextMeshPro/Distance Field")
+                {
+                    material.shader = Plugin.RainbowTextShader;
+                    Debug.Log("Replacing.");
+                }
             }
 
+            Image[] images = Resources.FindObjectsOfTypeAll(typeof(Image)) as Image[];
+            foreach (var image in images)
+            {
+                if(image.sprite?.name != null && _whiteListedSpritesRainbowUI.Any(x => x == image.sprite.name))
+                {
+                    // instance material
+                    // TODO Fancier fix
+                    image.material.shader = Plugin.RainbowUIShader;
+                }
+            }
+            
         }
 
         public static void ToggleCustomPass(HDAdditionalCameraData cameraData, bool enable)
