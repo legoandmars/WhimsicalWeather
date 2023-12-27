@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Text;
 using UnityEngine.Rendering.HighDefinition;
 using UnityEngine;
+using TMPro;
 
 namespace LethalVision.Patches
 {
@@ -33,8 +34,14 @@ namespace LethalVision.Patches
                 Debug.Log("Setting additional camera data...");
                 additionalCameraData.customRenderingSettings = true;
                 ToggleCustomPass(additionalCameraData, true);
-
             }
+
+            TextMeshProUGUI[] texts = Resources.FindObjectsOfTypeAll(typeof(TextMeshProUGUI)) as TextMeshProUGUI[];
+            foreach(var text in texts)
+            {
+                Debug.Log(text.fontMaterial.shader.name);
+            }
+
         }
 
         public static void ToggleCustomPass(HDAdditionalCameraData cameraData, bool enable)
