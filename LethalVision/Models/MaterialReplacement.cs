@@ -12,12 +12,14 @@ namespace LethalVision.Models
 
         public bool MaterialsReplaced => _replacedMaterials.Count > 0;
 
+        public void ReplaceMaterialIfMatch(Material material)
+        {
+            if (!MaterialIsMatch(material)) return;
+            ReplaceOnMaterial(material);
+        }
+
         public abstract bool MaterialIsMatch(Material material);
-
-        public abstract void ReplaceMaterialIfMatch(Material material);
-
         public abstract void ReplaceOnMaterial(Material material);
-
         public abstract void RestoreMaterials();
     }
 }

@@ -6,11 +6,9 @@ using UnityEngine;
 
 namespace LethalVision.Models
 {
-    // used to keep track of changes we make to the game so we can undo them
     internal class TextureReplacement : MaterialReplacement
     {
-        private Texture? _original; // assumes the original will be the same for all materials. always the case now but might need changing
-
+        private Dictionary<Material, Texture?> _originalTexturesByMaterial = new();
         private Texture _replacement;
         private string _materialName;
         private string _propertyName;
@@ -30,12 +28,6 @@ namespace LethalVision.Models
             return true;
         }
 
-        public override void ReplaceMaterialIfMatch(Material material)
-        {
-            if (!MaterialIsMatch(material)) return;
-            ReplaceOnMaterial(material);
-        }
-
         public override void ReplaceOnMaterial(Material material)
         {
             if (!material.HasProperty(_propertyName))
@@ -43,28 +35,28 @@ namespace LethalVision.Models
                 Debug.LogWarning($"Attempted to replace texture on {material.name} but property {_propertyName} does not exist!");
                 return;
             }
-
-            if (_original == null)
-            {
-                _original = material.GetTexture(_propertyName);
-            }
-            material.SetTexture(_propertyName, _replacement);
+            if (_replacedMaterials.Contains(material)) return;
+            
             _replacedMaterials.Add(material);
+            _originalTexturesByMaterial.Add(material, material.GetTexture(_propertyName));
+
+            material.SetTexture(_propertyName, _replacement);
         }
 
         public override void RestoreMaterials()
         {
             foreach (var material in _replacedMaterials)
             {
-                material.SetTexture(_propertyName, _original); // texture set could be null, which will be blank
+                material.SetTexture(_propertyName, _originalTexturesByMaterial[material]); // texture set could be null, which will be blank
             }
 
             _replacedMaterials.Clear();
+            _originalTexturesByMaterial.Clear();
         }
 
         public override string ToString()
         {
-            return $"MaterialReplacement (Texture): {_replacement.name}";
+            return $"MaterialReplacement (Texture): {_replacement.name} (replacing {_propertyName} on {_materialName})";
         }
     }
 }
