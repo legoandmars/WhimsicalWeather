@@ -22,6 +22,7 @@ namespace LethalVision.Models
 
         public override bool MaterialIsMatch(Material material)
         {
+            if (material == null || material.shader == null) return false;
             if (!material.name.StartsWith(_materialName)) return false;
             if (!material.HasProperty(_propertyName)) return false;
 
@@ -47,6 +48,7 @@ namespace LethalVision.Models
         {
             foreach (var material in _replacedMaterials)
             {
+                if (material == null) continue;
                 material.SetTexture(_propertyName, _originalTexturesByMaterial[material]); // texture set could be null, which will be blank
             }
 

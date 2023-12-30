@@ -69,8 +69,7 @@ namespace LethalVision.Controllers
         // this does NOT perform well right now!
         public void ReplaceAll()
         {
-            TextMeshProUGUI[] texts = Resources.FindObjectsOfTypeAll(typeof(TextMeshProUGUI)) as TextMeshProUGUI[];
-            var materials = texts.Select(x => x.fontSharedMaterial).Distinct();
+            Material[] materials = Resources.FindObjectsOfTypeAll(typeof(Material)) as Material[];
             foreach (var material in materials)
             {
                 foreach (var materialReplacement in _materialReplacements)

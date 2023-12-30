@@ -23,7 +23,7 @@ namespace LethalVision.Models
 
         public override bool MaterialIsMatch(Material material)
         {
-            // "TextMeshPro/Distance Field"
+            if (material == null || material.shader == null) return false;
             return material.shader.name == _shaderName;
         }
 
@@ -41,6 +41,7 @@ namespace LethalVision.Models
         {
             foreach (var material in _replacedMaterials)
             {
+                if (material == null) continue;
                 material.shader = _originalShadersByMaterial[material];
             }
 
