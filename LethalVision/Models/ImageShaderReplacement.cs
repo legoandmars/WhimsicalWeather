@@ -11,7 +11,7 @@ namespace LethalVision.Models
     internal abstract class ImageShaderReplacement
     {
         // https://www.youtube.com/watch?v=x0H_WPzoTb0
-        protected Dictionary<Image, Material> _originalMaterialsByImage = new();
+        protected Dictionary<Image, Material?> _originalMaterialsByImage = new();
 
         public bool ImageShadersReplaced => _originalMaterialsByImage.Count > 0;
 

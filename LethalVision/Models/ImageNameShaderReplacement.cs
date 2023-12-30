@@ -19,16 +19,13 @@ namespace LethalVision.Models
 
         public override bool ImageShaderIsMatch(Image image)
         {
-            // "TextMeshPro/Distance Field"
-            return image.sprite.name == _spriteName;
+            return image != null && image.sprite != null && image.sprite.name == _spriteName;
         }
 
         public override void ReplaceImageShader(Image image)
         {
             if (_originalMaterialsByImage.ContainsKey(image)) return;
-
             _originalMaterialsByImage.Add(image, image.material);
-
             image.material = UnityEngine.Object.Instantiate(image.material);
             image.material.shader = _replacement;
         }

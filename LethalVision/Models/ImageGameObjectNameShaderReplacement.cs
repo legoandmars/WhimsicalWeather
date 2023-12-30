@@ -22,6 +22,8 @@ namespace LethalVision.Models
 
         public override bool ImageShaderIsMatch(Image image)
         {
+            if (image == null || image.gameObject == null) return false;
+            if (_parentName != null && image.transform.parent == null) return false;
             if (_parentName != null && image.transform.parent.name != _parentName) return false;
             if (image.gameObject.name != _gameObjectName) return false;
             return true;

@@ -2,8 +2,11 @@
 using LethalVision.Models;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace LethalVision.Controllers
 {
@@ -12,6 +15,7 @@ namespace LethalVision.Controllers
         private static List<string> _imageSpriteNames = new()
         {
             "DialogueBox1Frame 2", // used for chat menu, inventory slots, etc
+            "DialogueBox1Frame 3", // also used for chat menu maybe?
             "SprintMeter",
             "scanCircle1",
             "scanCircle2",
@@ -41,6 +45,7 @@ namespace LethalVision.Controllers
             {
                 _materialReplacements.Add(new TextureReplacement(replacement));
             }
+            _materialReplacements.Add(new TextShaderReplacement(Plugin.RainbowTextShader, "TextMeshPro/Distance Field"));
         }
 
         public void CreateImageShaderReplacements()
@@ -58,6 +63,43 @@ namespace LethalVision.Controllers
                 else replacement = new(Plugin.RainbowUIShader, imageGameObjectName);
 
                 _imageShaderReplacements.Add(replacement);
+            }
+        }
+
+        // this does NOT perform well right now!
+        public void ReplaceAll()
+        {
+            TextMeshProUGUI[] texts = Resources.FindObjectsOfTypeAll(typeof(TextMeshProUGUI)) as TextMeshProUGUI[];
+            var materials = texts.Select(x => x.fontSharedMaterial).Distinct();
+            foreach (var material in materials)
+            {
+                foreach (var materialReplacement in _materialReplacements)
+                {
+                    materialReplacement.ReplaceMaterialIfMatch(material);
+                }
+            }
+
+            Image[] images = Resources.FindObjectsOfTypeAll(typeof(Image)) as Image[];
+            foreach (var image in images)
+            {
+                // TODO: If there's no sprite, we can just use the vertex color to save a ton of performance
+                // Come up with second vertex-only shader
+                foreach (var imageReplacement in _imageShaderReplacements)
+                {
+                    imageReplacement.ReplaceImageShaderIfMatch(image);
+                }
+            }
+        }
+
+        public void UnreplaceAll()
+        {
+            foreach (var materialReplacement in _materialReplacements)
+            {
+                materialReplacement.RestoreMaterials();
+            }
+            foreach (var imageShaderReplacement in _imageShaderReplacements)
+            {
+                imageShaderReplacement.RestoreImageShaders();
             }
         }
 

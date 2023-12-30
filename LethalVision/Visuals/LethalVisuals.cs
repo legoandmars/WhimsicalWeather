@@ -5,6 +5,8 @@ using UnityEngine.Rendering.HighDefinition;
 using UnityEngine;
 using System.Linq;
 using LethalVision.Patches;
+using LethalVision.Controllers;
+using LethalVision.Behaviours;
 
 namespace LethalVision.Visuals
 {
@@ -24,6 +26,14 @@ namespace LethalVision.Visuals
         private float _animationProgress;
 
         private CustomPassVolume? _customPassVolume;
+        private ReplacementController _replacementController = new();
+
+        private void Awake()
+        {
+            var textureReplacementBehaviours = Plugin.VisualsObject.GetComponentsInChildren<TextureReplacementBehaviour>(true).ToList(); // load serialized texture replacements
+            _replacementController.CreateTextureReplacements(textureReplacementBehaviours);
+            _replacementController.CreateImageShaderReplacements();
+        }
 
         private void Update()
         {
@@ -41,7 +51,15 @@ namespace LethalVision.Visuals
                 {
                     _animating = false;
                     _sparkles.GetComponent<ParticleSystem>().Stop();
-                    if (_reversedAnimation) DisableAfterAnimation();
+                    if (_reversedAnimation)
+                    {
+                        DisableAfterAnimation();
+                        _replacementController.UnreplaceAll();
+                    }
+                    else
+                    {
+                        _replacementController.ReplaceAll();
+                    }
                 }
             }
         }
