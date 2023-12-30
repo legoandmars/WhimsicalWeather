@@ -44,24 +44,42 @@ namespace LethalVision.Visuals
             // animation time is like 5 seconds i guess
             if (_animating && _animationProgress < _animationLength)
             {
-                SetEffectPercentage(_reversedAnimation ? 1 - (_animationProgress / _animationLength) : _animationProgress / _animationLength);
-
-                _animationProgress += Time.deltaTime;
                 if (_animationProgress >= _animationLength)
                 {
                     _animating = false;
                     _sparkles.GetComponent<ParticleSystem>().Stop();
-                    if (_reversedAnimation)
+                    if (!_reversedAnimation)
                     {
-                        DisableAfterAnimation();
-                        _replacementController.UnreplaceAll();
+                        ReplaceVisuals();
                     }
                     else
                     {
-                        _replacementController.ReplaceAll();
+                        DisableAfterAnimation();
                     }
+                    return;
                 }
+
+                SetEffectPercentage(Mathf.Clamp01(_reversedAnimation ? 1 - (_animationProgress / _animationLength) : _animationProgress / _animationLength));
+
+                _animationProgress += Time.deltaTime;
             }
+        }
+
+        private void ReplaceVisuals()
+        {
+            _replacementController.ReplaceAll();
+            WalkieTalkiePatches.SetWalkieLightIntensity(WalkieTalkiePatches.WalkieTalkieLightIntensityOverride);
+        }
+
+        private void UnreplaceVisuals()
+        {
+            if (_rainbow != null)
+            {
+                _rainbow.SetActive(false);
+            }
+
+            _replacementController.UnreplaceAll();
+            WalkieTalkiePatches.SetWalkieLightIntensity(WalkieTalkiePatches.WalkieTalkieLightIntensityDefault);
         }
 
         public void SetAudio(AudioClip sparkleAudio)
@@ -130,9 +148,12 @@ namespace LethalVision.Visuals
                 _sparkles.GetComponent<ParticleSystem>().Play();
                 SetEffectPercentage(1f);
             }
+
             _animating = true;
             _reversedAnimation = true;
             _animationProgress = 0;
+
+            UnreplaceVisuals();
         }
         private void SetEffectPercentage(float progress)
         {
@@ -166,10 +187,6 @@ namespace LethalVision.Visuals
             if (_sparkles != null)
             {
                 _sparkles.SetActive(false);
-            }
-            if (_rainbow != null)
-            {
-                _rainbow.SetActive(false);
             }
             customPass.enabled = false;
         }
