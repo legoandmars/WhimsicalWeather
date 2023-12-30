@@ -101,9 +101,13 @@ namespace LethalVision.Visuals
         public void Disable()
         {
             // TODO: Add check if we're even allowed to disable here
-            PlaySparkleAudio();
-            _sparkles.GetComponent<ParticleSystem>().Play();
-            SetEffectPercentage(1f);
+            // TODO: This isn't getting reset on game leave
+            if (_sparkles != null)
+            {
+                PlaySparkleAudio();
+                _sparkles.GetComponent<ParticleSystem>().Play();
+                SetEffectPercentage(1f);
+            }
             _animating = true;
             _reversedAnimation = true;
             _animationProgress = 0;

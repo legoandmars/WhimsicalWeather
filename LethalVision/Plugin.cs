@@ -13,6 +13,8 @@ namespace LethalVision
         public static Material PassMaterial;
         public static Shader RainbowTextShader;
         public static Shader RainbowUIShader;
+        public static Shader RainbowLerpShader; // intended for lightning; currently unused
+        public static Shader RainbowParticleShader; // uses vertex IDs to get ~4 random colors for particles without having to get complex
         public static GameObject VisualsObject;
 
         private LethalVisuals _visuals;
@@ -25,6 +27,8 @@ namespace LethalVision
             PassMaterial = GetPrefabMaterialFromName("PassShader");
             RainbowTextShader = GetPrefabMaterialFromName("TextShader").shader;
             RainbowUIShader = GetPrefabMaterialFromName("UIShader").shader;
+            RainbowLerpShader = GetPrefabMaterialFromName("SmoothShader").shader;
+            RainbowParticleShader = GetPrefabMaterialFromName("ParticleShader").shader;
 
             Harmony.CreateAndPatchAll(Assembly.GetExecutingAssembly());
 

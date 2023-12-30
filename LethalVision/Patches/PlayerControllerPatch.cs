@@ -48,7 +48,10 @@ namespace LethalVision.Patches
             "scanCircle1",
             "scanCircle2",
             "ScanUI1",
-            "DialogueBoxSimple"
+            "DialogueBoxSimple",
+            "BatteryIcon",
+            "BatteryMeter",
+            "BatteryMeterFrame"
         };
 
         private static List<string> _whiteListedNamesRainbowUI = new()
