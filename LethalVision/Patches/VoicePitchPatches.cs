@@ -13,7 +13,7 @@ namespace LethalVision.Patches
     [HarmonyPatch]
     internal class VoicePitchPatches
     {
-        private const float _maxVoicePitchAddAmount = 0.3f;
+        private const float _maxVoicePitchAddAmount = 0.3f; // may need some balance changes, I'm not sure if this too much. I still want the game to be playable, just a bit harder
 
         private static MethodInfo _modifiedVoiceTargetsMethod = AccessTools.Method(typeof(VoicePitchPatches), "ModifiedPlayerVoicePitches");
         private static float _voicePitchAddAmount = 0f;
@@ -27,7 +27,6 @@ namespace LethalVision.Patches
             {
                 if (codes[i].opcode == OpCodes.Ldfld && codes[i].operand is FieldInfo fieldInfo && fieldInfo.Name == "playerVoicePitchTargets")
                 {
-                    Debug.Log("patch");
                     codes[i].opcode = OpCodes.Call;
                     codes[i].operand = _modifiedVoiceTargetsMethod;
                 }
