@@ -4,12 +4,15 @@ using System.Text;
 using UnityEngine.Rendering.HighDefinition;
 using UnityEngine;
 using System.Linq;
+using LethalVision.Patches;
 
 namespace LethalVision.Visuals
 {
     public class LethalVisuals : MonoBehaviour
     {
         private const float _animationLength = 3f;
+
+        public static bool LethalVisualsEnabled = false;
 
         private bool _enabled = false;
         private GameObject? _sparkles;
@@ -59,6 +62,7 @@ namespace LethalVision.Visuals
                 Enable();
             }
             _enabled = !_enabled;
+            LethalVisualsEnabled = _enabled;
         }
 
         public void Enable()
@@ -122,6 +126,7 @@ namespace LethalVision.Visuals
                 float sparklesPosition = ((1 - progress) * (range * 2)) - range;
                 _sparkles.transform.localPosition = new Vector3(_sparkles.transform.localPosition.x, sparklesPosition, _sparkles.transform.localPosition.z);
             }
+            VoicePitchPatches.SetVoicePitchOverridePercent(progress);
         }
 
         private void PlaySparkleAudio()
