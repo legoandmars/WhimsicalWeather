@@ -23,7 +23,11 @@ namespace LethalVision.Controllers
             "DialogueBoxSimple",
             "BatteryIcon",
             "BatteryMeter",
-            "BatteryMeterFrame"
+            "BatteryMeterFrame",
+            "timeIcon1",
+            "timeIcon2", 
+            "timeIcon3",
+            "timeIcon3b"
         };
 
         // use "/" to denote parent gameObject
