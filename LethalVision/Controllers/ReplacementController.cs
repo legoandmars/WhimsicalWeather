@@ -27,7 +27,8 @@ namespace LethalVision.Controllers
             "timeIcon1",
             "timeIcon2", 
             "timeIcon3",
-            "timeIcon3b"
+            "timeIcon3b",
+            "SpeakingSymbol" // spectate voice chat activity
         };
 
         // use "/" to denote parent gameObject
