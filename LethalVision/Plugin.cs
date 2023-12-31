@@ -18,6 +18,7 @@ namespace LethalVision
         public static Shader RainbowLerpShader; // intended for lightning; currently unused
         public static Shader RainbowParticleShader; // uses vertex IDs to get ~4 random colors for particles without having to get complex
         public static GameObject VisualsObject;
+        public static GameObjectActivityBehaviour WeatherEvents;
 
         private LethalVisuals _visuals;
 
@@ -47,18 +48,18 @@ namespace LethalVision
             var dummyObject = new GameObject("LethalVisualsDummy");
             dummyObject.hideFlags = HideFlags.HideAndDontSave;
 
-            var permanentObject = new GameObject("LethalVisualsPermanentObject");
-            permanentObject.hideFlags = HideFlags.HideAndDontSave;
-            var activityBehaviour = permanentObject.AddComponent<GameobjectActivityBehaviour>();
-            permanentObject.SetActive(false);
-            activityBehaviour.EventsEnabled = true;
+            var weatherEventsObject = new GameObject("LethalVisualsPermanentObject");
+            weatherEventsObject.hideFlags = HideFlags.HideAndDontSave;
+            WeatherEvents = weatherEventsObject.AddComponent<GameObjectActivityBehaviour>();
+            weatherEventsObject.SetActive(false);
+            WeatherEvents.EventsEnabled = true;
 
 
             WeatherEffect weatherEffect = new()
             {
                 name = "<color=#FF00FF>Whimsical</color>",
                 effectObject = dummyObject,
-                effectPermanentObject = permanentObject,
+                effectPermanentObject = weatherEventsObject,
                 lerpPosition = false,
                 sunAnimatorBool = "",
                 transitioning = false

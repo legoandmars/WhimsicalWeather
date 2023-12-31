@@ -49,7 +49,7 @@ namespace LethalVision.Visuals
 
         private void Update()
         {
-            if (BepInEx.UnityInput.Current.GetKeyDown(KeyCode.Tilde))
+            if (BepInEx.UnityInput.Current.GetKeyDown(KeyCode.Q))
             {
                 ToggleVisualsEvent(!_enabled);
             }
@@ -61,7 +61,10 @@ namespace LethalVision.Visuals
                 if (_animationProgress >= _animationLength)
                 {
                     _animating = false;
-                    _sparkles.GetComponent<ParticleSystem>().Stop();
+                    if (_sparkles != null)
+                    {
+                        _sparkles.GetComponent<ParticleSystem>().Stop();
+                    }
                     if (!_reversedAnimation)
                     {
                         ReplaceVisuals();
@@ -106,6 +109,7 @@ namespace LethalVision.Visuals
 
         public void Enable()
         {
+            Debug.Log("Enabling LethalVisuals.");
             _enabled = true;
             LethalVisualsEnabled = true;
 
@@ -146,6 +150,7 @@ namespace LethalVision.Visuals
         }
         public void Disable()
         {
+            Debug.Log("Disabling LethalVisuals.");
             _enabled = false;
             LethalVisualsEnabled = false;
 

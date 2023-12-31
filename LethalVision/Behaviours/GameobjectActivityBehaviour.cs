@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace LethalVision.Behaviours
 {
-    public class GameobjectActivityBehaviour : MonoBehaviour
+    public class GameObjectActivityBehaviour : MonoBehaviour
     {
         public bool EventsEnabled = false;
 
