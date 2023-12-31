@@ -42,8 +42,10 @@ namespace LethalVision.Visuals
                 ToggleVisuals();
             }
             // animation time is like 5 seconds i guess
-            if (_animating && _animationProgress < _animationLength)
+            if (_animating)
             {
+                SetEffectPercentage(Mathf.Clamp01(_reversedAnimation ? 1 - (_animationProgress / _animationLength) : _animationProgress / _animationLength));
+
                 if (_animationProgress >= _animationLength)
                 {
                     _animating = false;
@@ -56,10 +58,7 @@ namespace LethalVision.Visuals
                     {
                         DisableAfterAnimation();
                     }
-                    return;
                 }
-
-                SetEffectPercentage(Mathf.Clamp01(_reversedAnimation ? 1 - (_animationProgress / _animationLength) : _animationProgress / _animationLength));
 
                 _animationProgress += Time.deltaTime;
             }

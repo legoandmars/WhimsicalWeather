@@ -4,6 +4,7 @@ using LethalVision.Visuals;
 using System.IO;
 using System.Reflection;
 using UnityEngine;
+using static LethalLib.Modules.Levels;
 
 namespace LethalVision
 {
@@ -36,6 +37,27 @@ namespace LethalVision
             visualsObject.hideFlags = HideFlags.HideAndDontSave;
             _visuals = visualsObject.AddComponent<LethalVisuals>();
             _visuals.SetAudio(VisualsObject.transform.Find("SparkleAudio").GetComponent<AudioSource>().clip);
+
+            RegisterWeather(visualsObject);
+        }
+
+        private void RegisterWeather(GameObject visualsObject)
+        {
+            var dummyObject = new GameObject("FakeVisuals");
+            dummyObject.hideFlags = HideFlags.HideAndDontSave;
+
+            WeatherEffect weatherEffect = new()
+            {
+                name = "<color=#FF00FF>Whimsical</color>",
+                effectObject = dummyObject,
+                effectPermanentObject = visualsObject,
+                lerpPosition = false,
+                sunAnimatorBool = "",
+                transitioning = false
+            };
+
+            LethalLib.Modules.Weathers.RegisterWeather("<color=#FF00FF>Whimsical</color>", weatherEffect, LevelTypes.All, 0, 0);
+
         }
 
         private GameObject GetVisuals()
