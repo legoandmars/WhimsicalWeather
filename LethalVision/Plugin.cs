@@ -1,5 +1,6 @@
 ﻿using BepInEx;
 using HarmonyLib;
+using LethalVision.Behaviours;
 using LethalVision.Visuals;
 using System.IO;
 using System.Reflection;
@@ -43,14 +44,21 @@ namespace LethalVision
 
         private void RegisterWeather(GameObject visualsObject)
         {
-            var dummyObject = new GameObject("FakeVisuals");
+            var dummyObject = new GameObject("LethalVisualsDummy");
             dummyObject.hideFlags = HideFlags.HideAndDontSave;
+
+            var permanentObject = new GameObject("LethalVisualsPermanentObject");
+            permanentObject.hideFlags = HideFlags.HideAndDontSave;
+            var activityBehaviour = permanentObject.AddComponent<GameobjectActivityBehaviour>();
+            permanentObject.SetActive(false);
+            activityBehaviour.EventsEnabled = true;
+
 
             WeatherEffect weatherEffect = new()
             {
                 name = "<color=#FF00FF>Whimsical</color>",
                 effectObject = dummyObject,
-                effectPermanentObject = visualsObject,
+                effectPermanentObject = permanentObject,
                 lerpPosition = false,
                 sunAnimatorBool = "",
                 transitioning = false

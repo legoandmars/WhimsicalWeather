@@ -15,6 +15,9 @@ namespace LethalVision.Visuals
         private const float _animationLength = 3f;
 
         public static bool LethalVisualsEnabled = false;
+        
+        public static event Action OnVisualsEnabled;
+        public static event Action OnVisualsDisabled;
 
         private bool _enabled = false;
         private GameObject? _sparkles;
@@ -33,13 +36,22 @@ namespace LethalVision.Visuals
             var textureReplacementBehaviours = Plugin.VisualsObject.GetComponentsInChildren<TextureReplacementBehaviour>(true).ToList(); // load serialized texture replacements
             _replacementController.CreateTextureReplacements(textureReplacementBehaviours);
             _replacementController.CreateImageShaderReplacements();
+
+            OnVisualsEnabled += Enable;
+            OnVisualsDisabled += Disable;
+        }
+
+        private void OnDestroy()
+        {
+            OnVisualsEnabled -= Enable;
+            OnVisualsDisabled -= Disable;
         }
 
         private void Update()
         {
-            if (BepInEx.UnityInput.Current.GetKeyDown(KeyCode.P))
+            if (BepInEx.UnityInput.Current.GetKeyDown(KeyCode.Tilde))
             {
-                ToggleVisuals();
+                ToggleVisualsEvent(!_enabled);
             }
             // animation time is like 5 seconds i guess
             if (_animating)
@@ -64,6 +76,12 @@ namespace LethalVision.Visuals
             }
         }
 
+        public static void ToggleVisualsEvent(bool enabled)
+        {
+            if (enabled) OnVisualsEnabled?.Invoke();
+            else OnVisualsDisabled?.Invoke();
+        }
+
         private void ReplaceVisuals()
         {
             _replacementController.ReplaceAll();
@@ -86,22 +104,11 @@ namespace LethalVision.Visuals
             _sparkleAudio = sparkleAudio;
         }
 
-        public void ToggleVisuals()
-        {
-            if (_enabled)
-            {
-                Disable();
-            }
-            else
-            {
-                Enable();
-            }
-            _enabled = !_enabled;
-            LethalVisualsEnabled = _enabled;
-        }
-
         public void Enable()
         {
+            _enabled = true;
+            LethalVisualsEnabled = true;
+
             var localPlayer = StartOfRound.Instance?.localPlayerController;
             if (localPlayer == null) return;
             var customPass = GetCustomPass(localPlayer.gameplayCamera);
@@ -139,6 +146,9 @@ namespace LethalVision.Visuals
         }
         public void Disable()
         {
+            _enabled = false;
+            LethalVisualsEnabled = false;
+
             // TODO: Add check if we're even allowed to disable here
             // TODO: This isn't getting reset on game leave
             if (_sparkles != null)

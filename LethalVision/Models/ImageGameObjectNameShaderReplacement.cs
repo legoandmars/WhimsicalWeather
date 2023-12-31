@@ -43,6 +43,7 @@ namespace LethalVision.Models
         {
             foreach (var (image, material) in _originalMaterialsByImage)
             {
+                if (image == null) continue;
                 image.material = material;
             }
 
