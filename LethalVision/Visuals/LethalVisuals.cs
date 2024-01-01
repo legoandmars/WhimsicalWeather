@@ -141,6 +141,11 @@ namespace LethalVision.Visuals
                 _rainbow.transform.localScale = new Vector3(300f, 300f, 300f);
             }
 
+            if (HUDManager.Instance != null)
+            {
+                HUDManager.Instance.DisplayTip("Photosensitivity alert!", "<size=16px>You've landed in <color=#FF00FF>Whimsical</color> weather.\nThis mod features flashing lights that may potentially trigger seizures for people with epilepsy.", true, true, "LC_PhotosensitiveTip");
+            }
+
             _sparkles.SetActive(true);
             _rainbow.SetActive(true);
 
