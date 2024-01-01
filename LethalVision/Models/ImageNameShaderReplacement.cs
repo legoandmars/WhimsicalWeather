@@ -28,6 +28,10 @@ namespace LethalVision.Models
             _originalMaterialsByImage.Add(image, image.material);
             image.material = UnityEngine.Object.Instantiate(image.material);
             image.material.shader = _replacement;
+
+            if (Config.Instance.RainbowUIHueShiftSpeed.Value == 1f) return;
+            if (image.material.shader != Plugin.RainbowUIShader && image.material.shader != Plugin.RainbowTextShader) return;
+            image.material.SetFloat("_HueShiftSpeed", Config.Instance.RainbowUIHueShiftSpeed.Value);
         }
 
         public override void RestoreImageShaders()

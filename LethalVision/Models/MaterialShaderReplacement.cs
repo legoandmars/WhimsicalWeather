@@ -35,6 +35,10 @@ namespace LethalVision.Models
             _originalShadersByMaterial.Add(material, material.shader);
 
             material.shader = _replacement;
+
+            if (Config.Instance.RainbowUIHueShiftSpeed.Value == 1f) return;
+            if (material.shader != Plugin.RainbowUIShader && material.shader != Plugin.RainbowTextShader) return;
+            material.SetFloat("_HueShiftSpeed", Config.Instance.RainbowUIHueShiftSpeed.Value);
         }
 
         public override void RestoreMaterials()
