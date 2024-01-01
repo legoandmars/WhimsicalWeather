@@ -121,7 +121,7 @@ namespace LethalVision.Visuals
             if (_sparkles == null)
             {
                 // too lazy to set up rendering priority, if the player faces a wall or something they will have to Deal With It
-                _sparkles = Instantiate(Plugin.VisualsObject.transform.Find("Sparticles").gameObject);
+                _sparkles = Instantiate(Plugin.SparkParticles);
                 _sparkles.transform.SetParent(localPlayer.gameplayCamera.transform, false);
                 _sparkles.transform.localPosition = new Vector3(0f, 0f, 0.5f);
                 _sparkles.transform.localRotation = Quaternion.identity;
@@ -130,7 +130,7 @@ namespace LethalVision.Visuals
 
             if (_rainbow == null)
             {
-                _rainbow = Instantiate(Plugin.VisualsObject.transform.Find("rainbow").gameObject);
+                _rainbow = Instantiate(Plugin.Rainbow);
                 _rainbow.transform.localPosition = new Vector3(0f, 0f, 0f);
                 _rainbow.transform.localRotation = Quaternion.identity;
                 _rainbow.transform.localScale = new Vector3(300f, 300f, 300f);

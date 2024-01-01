@@ -18,6 +18,11 @@ namespace LethalVision
         public static Shader RainbowLerpShader; // intended for lightning; currently unused
         public static Shader RainbowParticleShader; // uses vertex IDs to get ~4 random colors for particles without having to get complex
         public static Shader RainbowDropshipLightsShader; // used for itemdropship tree christmas lights/star
+
+        public static GameObject SparkParticles;
+        public static GameObject Rainbow;
+        public static GameObject GooglyEyes;
+
         public static GameObject VisualsObject;
         public static GameObjectActivityBehaviour WeatherEvents;
 
@@ -28,12 +33,17 @@ namespace LethalVision
             // Plugin startup logic
             Logger.LogInfo($"Plugin {MyPluginInfo.PLUGIN_GUID} is loaded!");
             VisualsObject = GetVisuals();
+
             PassMaterial = GetPrefabMaterialFromName("PassShader");
             RainbowTextShader = GetPrefabMaterialFromName("TextShader").shader;
             RainbowUIShader = GetPrefabMaterialFromName("UIShader").shader;
             RainbowLerpShader = GetPrefabMaterialFromName("SmoothShader").shader;
             RainbowParticleShader = GetPrefabMaterialFromName("ParticleShader").shader;
             RainbowDropshipLightsShader = GetPrefabMaterialFromName("DropshipLightsShader").shader;
+
+            SparkParticles = GetModelPrefabFromName("Sparticles");
+            Rainbow = GetModelPrefabFromName("rainbow");
+            GooglyEyes = GetModelPrefabFromName("GooglyEyeHolder");
 
             Harmony.CreateAndPatchAll(Assembly.GetExecutingAssembly());
 
@@ -83,6 +93,11 @@ namespace LethalVision
         private Material GetPrefabMaterialFromName(string name)
         {
             return VisualsObject.transform.Find(name).GetComponent<MeshRenderer>().sharedMaterial;
+        }
+
+        private GameObject GetModelPrefabFromName(string name)
+        {
+            return VisualsObject.transform.Find("Models/"+name).gameObject;
         }
     }
 }
