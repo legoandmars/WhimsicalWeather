@@ -6,6 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using UnityEngine;
+using UnityEngine.Rendering;
 using static LethalLib.Modules.Levels;
 
 namespace LethalVision
@@ -24,6 +25,7 @@ namespace LethalVision
         public static GameObject Rainbow;
         public static GameObject GooglyEyes;
         public static GameObject JesterHat;
+        public static GameObject RedLollypop;
 
         public static GameObject VisualsObject;
         public static GameObjectActivityBehaviour WeatherEvents;
@@ -50,9 +52,12 @@ namespace LethalVision
             Rainbow = GetModelPrefabFromName("rainbow");
             GooglyEyes = GetModelPrefabFromName("GooglyEyeHolder");
             JesterHat = GetModelPrefabFromName("JesterHat");
+            RedLollypop = GetModelPrefabFromName("Lollypop");
 
             ReplaceShadersWithLit(GooglyEyes);
             ReplaceShadersWithLit(JesterHat);
+            ReplaceShadersWithLit(RedLollypop);
+            InitializeTransparentMaterial(RedLollypop, "LollypopTransparent");
 
             Harmony.CreateAndPatchAll(Assembly.GetExecutingAssembly());
 
@@ -123,6 +128,15 @@ namespace LethalVision
                 material.shader = _litShader;
             }
 
+        }
+        public static void InitializeTransparentMaterial(GameObject gameObject, string materialName)
+        {
+            var materials = gameObject.GetComponentsInChildren<Renderer>(true).SelectMany(x => x.sharedMaterials).ToList();
+            foreach (var material in materials)
+            {
+                if (material.name != materialName) continue;
+                material.renderQueue = (int)RenderQueue.Transparent;
+            }
         }
     }
 }
