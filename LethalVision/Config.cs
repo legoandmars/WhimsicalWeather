@@ -8,6 +8,7 @@ namespace LethalVision
     public class Config
     {
         public static Config Instance;
+        public ConfigEntry<bool> RainbowUI { get; set; } // TODO: Hue Shift Speed. already supported in shader so should be easy to sync
         public ConfigEntry<bool> ChangePlayerPitch { get; set; }
         public ConfigEntry<float> PlayerPitchMultiplier { get; set; }
         public ConfigEntry<bool> RemovePlayerBlood { get; set; }
@@ -21,6 +22,12 @@ namespace LethalVision
 
         public Config(ConfigFile cfg)
         {
+            RainbowUI = cfg.Bind(
+                "Modifications",
+                "Rainbow UI",
+                true,
+                "Make the UI slowly cycle through rainbow colors when using whimsical vision"
+            );
             ChangePlayerPitch = cfg.Bind(
                 "Modifications.Player",
                 "Change Player Pitch",

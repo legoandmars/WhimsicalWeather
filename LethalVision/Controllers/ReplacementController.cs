@@ -48,10 +48,7 @@ namespace LethalVision.Controllers
             "BeamUpZap 1" // inverse teleporter
         };
 
-        private List<MaterialReplacement> _materialReplacements = new()
-        {
-            new MaterialShaderReplacement(Plugin.RainbowTextShader, "TextMeshPro/Distance Field")
-        };
+        private List<MaterialReplacement> _materialReplacements = new();
 
         private List<ImageShaderReplacement> _imageShaderReplacements = new();
 
@@ -71,9 +68,10 @@ namespace LethalVision.Controllers
             }
             foreach (var particleMaterialName in _particleMaterialNames)
             {
+                if (particleMaterialName == "SparkParticle" && !Config.Instance.RainbowZapGun.Value) continue;
                 _materialReplacements.Add(new MaterialNameShaderReplacement(Plugin.RainbowParticleShader, particleMaterialName, true));
             }
-            _materialReplacements.Add(new MaterialShaderReplacement(Plugin.RainbowTextShader, "TextMeshPro/Distance Field"));
+
             _materialReplacements.Add(new MaterialNameShaderReplacement(Plugin.RainbowDropshipLightsShader, "LEDLightYellow", false)); // item dropship lights
             _materialReplacements.Add(new ColorReplacement(new Color(0.9f, 0, 0, 1), "LEDLightYellow", "_Color")); // make item dropship lights more vibrant
             _materialReplacements.Add(new ColorReplacement(new Color(0, 0, 0.2f, 0.3f), "GlassTex", "_BaseColor")); // make magnifying glass more clear
@@ -87,6 +85,7 @@ namespace LethalVision.Controllers
 
         public void CreateImageShaderReplacements()
         {
+            if (!Config.Instance.RainbowUI.Value) return;
             foreach (var imageSpriteName in _imageSpriteNames)
             {
                 var replacement = new ImageNameShaderReplacement(Plugin.RainbowUIShader, imageSpriteName);
@@ -101,6 +100,7 @@ namespace LethalVision.Controllers
 
                 _imageShaderReplacements.Add(replacement);
             }
+            _materialReplacements.Add(new MaterialShaderReplacement(Plugin.RainbowTextShader, "TextMeshPro/Distance Field"));
         }
 
         // this does NOT perform well right now!
