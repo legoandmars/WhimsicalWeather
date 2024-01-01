@@ -67,6 +67,7 @@ namespace LethalVision.Controllers
             _materialReplacements.Add(new MaterialShaderReplacement(Plugin.RainbowTextShader, "TextMeshPro/Distance Field"));
             _materialReplacements.Add(new MaterialNameShaderReplacement(Plugin.RainbowUIShader, "LEDLightYellow", false)); // item dropship LED lights
             _materialReplacements.Add(new ColorReplacement(new Color(0, 0, 0.2f, 0.3f), "GlassTex", "_BaseColor")); // make magnifying glass more clear
+            _materialReplacements.Add(new FloatReplacement(0.85f, "GlassTex", "_Smoothness")); // make magnifying glass less blurry
         }
 
         public void CreateImageShaderReplacements()
