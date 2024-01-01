@@ -3,6 +3,7 @@ using HarmonyLib;
 using LethalVision.Behaviours;
 using LethalVision.Visuals;
 using System.IO;
+using System.Linq;
 using System.Reflection;
 using UnityEngine;
 using static LethalLib.Modules.Levels;
@@ -26,12 +27,15 @@ namespace LethalVision
         public static GameObject VisualsObject;
         public static GameObjectActivityBehaviour WeatherEvents;
 
+        private static Shader? _litShader;
+
         private LethalVisuals _visuals;
 
         private void Awake()
         {
             // Plugin startup logic
             Logger.LogInfo($"Plugin {MyPluginInfo.PLUGIN_GUID} is loaded!");
+            _litShader = Shader.Find("HDRP/Lit"); // idk if this will ever return the wrong lit shader?
             VisualsObject = GetVisuals();
 
             PassMaterial = GetPrefabMaterialFromName("PassShader");
@@ -44,6 +48,8 @@ namespace LethalVision
             SparkParticles = GetModelPrefabFromName("Sparticles");
             Rainbow = GetModelPrefabFromName("rainbow");
             GooglyEyes = GetModelPrefabFromName("GooglyEyeHolder");
+
+            ReplaceShadersWithLit(GooglyEyes);
 
             Harmony.CreateAndPatchAll(Assembly.GetExecutingAssembly());
 
@@ -98,6 +104,22 @@ namespace LethalVision
         private GameObject GetModelPrefabFromName(string name)
         {
             return VisualsObject.transform.Find("Models/"+name).gameObject;
+        }
+
+        public static void ReplaceShadersWithLit(GameObject gameObject)
+        {
+            if (_litShader == null)
+            {
+                Debug.LogWarning("Cannot find HDRP/Lit");
+                return;
+            }
+
+            var materials = gameObject.GetComponentsInChildren<Renderer>(true).SelectMany(x => x.sharedMaterials).ToList();
+            foreach (var material in materials)
+            {
+                material.shader = _litShader;
+            }
+
         }
     }
 }
