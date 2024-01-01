@@ -20,6 +20,7 @@ namespace LethalVision.Patches
         [HarmonyPostfix]
         private static void CreateDependencies(LightningBoltScript __instance)
         {
+            if (!Config.Instance.RainbowZapGun.Value) return;
             // HSV instead of OKHSL :-(
             // I don't wanna reimplement it in C# instead of shadercode rightnow as the implementation is fairly involved (probably 300-500 lines)
             // I wanted to initially use shadercode here but I don't have the funds to buy the lightning asset - it uses a special shader I'd have to modify.
@@ -28,19 +29,6 @@ namespace LethalVision.Patches
             H = (H + (Time.unscaledTime / 5)) % 1; // should maybe use deltatime/persistence instead? idk
             __instance.lightningMaterialMeshInternal.SetColor(_tintColorProperty, Color.HSVToRGB(H, S, V));
             __instance.lightningMaterialMeshNoGlowInternal.SetColor(_tintColorProperty, Color.HSVToRGB(H, S, V));
-        }
-
-        [HarmonyPatch(typeof(PatcherTool))]
-        [HarmonyPatch("Start")]
-        [HarmonyPrefix]
-        private static void PatcherTool(PatcherTool __instance) // i hardly know 'er tool!
-        {
-            // TODO: impl check based on if we're currently in fairy mode
-            var particleTransform = __instance.transform.Find("Effects/SparkParticle (1)");
-            if (particleTransform == null) return;
-
-            var renderer = particleTransform.GetComponent<ParticleSystemRenderer>();
-            renderer.material.shader = Plugin.RainbowParticleShader;
         }
     }
 }

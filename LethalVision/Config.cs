@@ -15,6 +15,7 @@ namespace LethalVision
         public ConfigEntry<float> ShipHornPitch { get; set; }
         public ConfigEntry<float> ShipHornStartPitch { get; set; }
         public ConfigEntry<bool> LollypopMeleeWeapons { get; set; }
+        public ConfigEntry<bool> RainbowZapGun { get; set; }
         public ConfigEntry<bool> GooglyEyeDogs { get; set; }
         public ConfigEntry<bool> JesterHat { get; set; }
 
@@ -30,7 +31,7 @@ namespace LethalVision
                 "Modifications.Player",
                 "Player Pitch Multiplier",
                 1.3f,
-                "The amount player voice chat pitch is multplied when using whimsical vision. Does nothing if Change Player Pitch is disabled."
+                "The amount player voice chat pitch is multplied when using whimsical vision. Does nothing if Change Player Pitch is disabled"
             );
             RemovePlayerBlood = cfg.Bind(
                 "Modifications.Player",
@@ -48,19 +49,25 @@ namespace LethalVision
                 "Modifications.Ship",
                 "Ship Horn Maximum Pitch",
                 1.3f,
-                "The maximum pitch of the ship's loud horn when using whimsical vision. Does nothing if Change Ship Horn Pitch is disabled."
+                "The maximum pitch of the ship's loud horn when using whimsical vision. Does nothing if Change Ship Horn Pitch is disabled"
             );
             ShipHornStartPitch = cfg.Bind(
                 "Modifications.Ship",
                 "Ship Horn Minimum Pitch",
                 1.25f,
-                "The minimum/starting pitch of the ship's loud horn when using whimsical vision. Does nothing if Change Ship Horn Pitch is disabled."
+                "The minimum/starting pitch of the ship's loud horn when using whimsical vision. Does nothing if Change Ship Horn Pitch is disabled"
             );
             LollypopMeleeWeapons = cfg.Bind(
                 "Modifications.Items",
                 "Lollypop Melee Weapons",
                 true,
                 "Replace melee weapons (Shovel, Stop Sign, Yield Sign) with lollypops when using whimsical vision"
+            );
+            RainbowZapGun = cfg.Bind(
+                "Modifications.Items",
+                "Rainbow Zap Gun",
+                true,
+                "Make the zap gun's color rainbow over time when using whimsical vision"
             );
             GooglyEyeDogs = cfg.Bind(
                 "Modifications.Enemies",
