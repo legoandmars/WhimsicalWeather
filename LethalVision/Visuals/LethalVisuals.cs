@@ -12,7 +12,7 @@ namespace LethalVision.Visuals
 {
     public class LethalVisuals : MonoBehaviour
     {
-        private const float _animationLength = 5f;
+        private const float _animationLength = 4f;
 
         public static bool LethalVisualsEnabled = false;
         
