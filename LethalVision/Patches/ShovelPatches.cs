@@ -23,7 +23,7 @@ namespace LethalVision.Patches
             CreateShovelVisuals(shovel);
             _trackedShovels.Add(shovel);
 
-            if (_tracking)
+            if (_tracking && Config.Instance.LollypopMeleeWeapons.Value)
             {
                 SetShovelVisuals(shovel, true);
             }
@@ -38,6 +38,7 @@ namespace LethalVision.Patches
             if (!enable) return;
             if (!(__instance is Shovel shovel)) return;
             if (!LethalVisuals.LethalVisualsEnabled) return;
+            if (!Config.Instance.LollypopMeleeWeapons.Value) return;
 
             // used in stop sign/warn sign
             if (shovel.gameObject.TryGetComponent(out MeshRenderer renderer))
@@ -55,6 +56,7 @@ namespace LethalVision.Patches
         {
             if (!(__instance is Shovel shovel)) return;
             if (!LethalVisuals.LethalVisualsEnabled) return;
+            if (!Config.Instance.LollypopMeleeWeapons.Value) return;
 
             // used in stop sign/warn sign
             if (shovel.gameObject.TryGetComponent(out MeshRenderer renderer))
@@ -65,6 +67,7 @@ namespace LethalVision.Patches
 
         public static void ReplaceAllShovels()
         {
+            if (!Config.Instance.LollypopMeleeWeapons.Value) return;
             foreach (var shovel in _trackedShovels)
             {
                 if (shovel == null) continue;

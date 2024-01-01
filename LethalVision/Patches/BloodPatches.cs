@@ -16,6 +16,7 @@ namespace LethalVision.Patches
         [HarmonyPrefix]
         private static bool DropBloodPrefix()
         {
+            if (!Config.Instance.RemovePlayerBlood.Value) return true;
             return !LethalVisuals.LethalVisualsEnabled;
         }
 
@@ -23,6 +24,7 @@ namespace LethalVision.Patches
         [HarmonyPostfix]
         private static void DamagePlayerFromOtherClientPostfix(PlayerControllerB __instance)
         {
+            if (!Config.Instance.RemovePlayerBlood.Value) return;
             if (__instance.health < 6 && __instance.bodyBloodDecals[0] != null && __instance.bodyBloodDecals[0].activeSelf)
             {
                 __instance.bodyBloodDecals[0].SetActive(false);
@@ -33,6 +35,7 @@ namespace LethalVision.Patches
         [HarmonyPrefix]
         private static bool MakeCorpseBloodyPrefix()
         {
+            if (!Config.Instance.RemovePlayerBlood.Value) return true;
             return !LethalVisuals.LethalVisualsEnabled;
         }
     }

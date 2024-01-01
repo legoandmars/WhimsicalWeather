@@ -41,6 +41,8 @@ namespace LethalVision
         {
             // Plugin startup logic
             Logger.LogInfo($"Plugin {MyPluginInfo.PLUGIN_GUID} is loaded!");
+            new Config(Config);
+
             _litShader = Shader.Find("HDRP/Lit"); // idk if this will ever return the wrong lit shader?
             VisualsObject = GetVisuals();
 
