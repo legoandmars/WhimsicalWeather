@@ -52,7 +52,16 @@ namespace LethalVision.Controllers
         {
             new MaterialShaderReplacement(Plugin.RainbowTextShader, "TextMeshPro/Distance Field")
         };
+
         private List<ImageShaderReplacement> _imageShaderReplacements = new();
+
+        // works differently as-is because it's only changing PlayOneShot and nothing is being permanently patched
+        private List<SoundReplacementBehaviour> _soundReplacements = new();
+
+        public void CreateSoundReplacements(List<SoundReplacementBehaviour> soundReplacements)
+        {
+            _soundReplacements = soundReplacements;
+        }
 
         public void CreateTextureReplacements(List<TextureReplacementBehaviour> textureReplacements)
         {
@@ -125,20 +134,14 @@ namespace LethalVision.Controllers
             }
         }
 
-        private void ReplaceTextures(List<Material> materials)
+        public void ReplaceSoundIfNeeded(ref AudioClip clip)
         {
-            foreach (var replacementInfo in _materialReplacements)
-            {
-                foreach (var material in materials)
-                {
-                    replacementInfo.ReplaceMaterialIfMatch(material);
-                }
+            if (clip == null) return;
+            string clipName = clip.name;
+            var newClip = _soundReplacements.FirstOrDefault(x => x.SoundName == clipName);
 
-                if (!replacementInfo.MaterialsReplaced)
-                {
-                    Debug.LogWarning($"No valid materials found for material replacement {replacementInfo}");
-                }
-            }
+            if (newClip == null) return;
+            clip = newClip.ReplacementClip;
         }
     }
 }

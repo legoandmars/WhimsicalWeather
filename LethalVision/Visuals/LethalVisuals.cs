@@ -34,8 +34,11 @@ namespace LethalVision.Visuals
         private void Awake()
         {
             var textureReplacementBehaviours = Plugin.VisualsObject.GetComponentsInChildren<TextureReplacementBehaviour>(true).ToList(); // load serialized texture replacements
+            var soundReplacementBehaviours = Plugin.VisualsObject.GetComponentsInChildren<SoundReplacementBehaviour>(true).ToList(); // load serialized texture replacements
             _replacementController.CreateTextureReplacements(textureReplacementBehaviours);
+            _replacementController.CreateSoundReplacements(soundReplacementBehaviours);
             _replacementController.CreateImageShaderReplacements();
+            AudioPatches.SetReplacementController(_replacementController);
 
             OnVisualsEnabled += Enable;
             OnVisualsDisabled += Disable;
