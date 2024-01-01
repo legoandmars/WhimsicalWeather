@@ -41,7 +41,17 @@ namespace LethalVision.Controllers
             "PleaseConfirmChangesPanel/Panel"
         };
 
-        private List<MaterialReplacement> _materialReplacements = new();
+        private static List<string> _particleMaterialNames = new()
+        {
+            "SparkParticle", // zapgun sparks
+            "BeamUpZap",
+            "BeamUpZap 1",
+        };
+
+        private List<MaterialReplacement> _materialReplacements = new()
+        {
+            new MaterialShaderReplacement(Plugin.RainbowTextShader, "TextMeshPro/Distance Field")
+        };
         private List<ImageShaderReplacement> _imageShaderReplacements = new();
 
         public void CreateTextureReplacements(List<TextureReplacementBehaviour> textureReplacements)
@@ -50,7 +60,11 @@ namespace LethalVision.Controllers
             {
                 _materialReplacements.Add(new TextureReplacement(replacement));
             }
-            _materialReplacements.Add(new TextShaderReplacement(Plugin.RainbowTextShader, "TextMeshPro/Distance Field"));
+            foreach (var particleMaterialName in _particleMaterialNames)
+            {
+                _materialReplacements.Add(new MaterialNameShaderReplacement(Plugin.RainbowParticleShader, particleMaterialName, true));
+            }
+            _materialReplacements.Add(new MaterialShaderReplacement(Plugin.RainbowTextShader, "TextMeshPro/Distance Field"));
         }
 
         public void CreateImageShaderReplacements()

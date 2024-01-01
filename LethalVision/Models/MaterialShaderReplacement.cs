@@ -9,13 +9,13 @@ namespace LethalVision.Models
     // does NOT handle instantiation/duplication
     // make sure to filter the text material list using .Distinct()!
     // may eventually want more strict filtering but we chill for now
-    internal class TextShaderReplacement : MaterialReplacement
+    internal class MaterialShaderReplacement : MaterialReplacement
     {
         private Dictionary<Material, Shader?> _originalShadersByMaterial = new();
         private Shader _replacement;
         private string _shaderName;
 
-        public TextShaderReplacement(Shader replacement, string shaderName)
+        public MaterialShaderReplacement(Shader replacement, string shaderName)
         {
             _shaderName = shaderName;
             _replacement = replacement;
