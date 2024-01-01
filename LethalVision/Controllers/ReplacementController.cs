@@ -44,8 +44,8 @@ namespace LethalVision.Controllers
         private static List<string> _particleMaterialNames = new()
         {
             "SparkParticle", // zapgun sparks
-            "BeamUpZap",
-            "BeamUpZap 1",
+            "BeamUpZap", // teleporter
+            "BeamUpZap 1" // inverse teleporter
         };
 
         private List<MaterialReplacement> _materialReplacements = new()
@@ -65,6 +65,8 @@ namespace LethalVision.Controllers
                 _materialReplacements.Add(new MaterialNameShaderReplacement(Plugin.RainbowParticleShader, particleMaterialName, true));
             }
             _materialReplacements.Add(new MaterialShaderReplacement(Plugin.RainbowTextShader, "TextMeshPro/Distance Field"));
+            _materialReplacements.Add(new MaterialNameShaderReplacement(Plugin.RainbowUIShader, "LEDLightYellow", false)); // item dropship LED lights
+            _materialReplacements.Add(new ColorReplacement(new Color(0, 0, 0.2f, 0.3f), "GlassTex", "_BaseColor")); // make magnifying glass more clear
         }
 
         public void CreateImageShaderReplacements()
