@@ -11,17 +11,15 @@ namespace LethalVision.Patches
     [HarmonyPatch]
     internal class BloodPatches
     {
-        [HarmonyPatch(typeof(PlayerControllerB))]
-        [HarmonyPatch(nameof(PlayerControllerB.DropBlood))]
-        [HarmonyPatch(nameof(PlayerControllerB.AddBloodToBody))]
+        [HarmonyPatch(typeof(PlayerControllerB), nameof(PlayerControllerB.DropBlood))]
+        [HarmonyPatch(typeof(PlayerControllerB), nameof(PlayerControllerB.AddBloodToBody))]
         [HarmonyPrefix]
-        private static bool DropBloodPrefix(PlayerControllerB __instance)
+        private static bool DropBloodPrefix()
         {
             return !LethalVisuals.LethalVisualsEnabled;
         }
 
-        [HarmonyPatch(typeof(PlayerControllerB))]
-        [HarmonyPatch(nameof(PlayerControllerB.DamagePlayerFromOtherClientClientRpc))]
+        [HarmonyPatch(typeof(PlayerControllerB), nameof(PlayerControllerB.DamagePlayerFromOtherClientClientRpc))]
         [HarmonyPostfix]
         private static void DamagePlayerFromOtherClientPostfix(PlayerControllerB __instance)
         {
@@ -31,8 +29,7 @@ namespace LethalVision.Patches
             }
         }
 
-        [HarmonyPatch(typeof(DeadBodyInfo))]
-        [HarmonyPatch(nameof(DeadBodyInfo.MakeCorpseBloody))]
+        [HarmonyPatch(typeof(DeadBodyInfo), nameof(DeadBodyInfo.MakeCorpseBloody))]
         [HarmonyPrefix]
         private static bool MakeCorpseBloodyPrefix()
         {
