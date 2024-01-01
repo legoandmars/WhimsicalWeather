@@ -1,6 +1,7 @@
 ﻿using DigitalRuby.ThunderAndLightning;
 using GameNetcodeStuff;
 using HarmonyLib;
+using LethalVision.Visuals;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -20,6 +21,7 @@ namespace LethalVision.Patches
         [HarmonyPostfix]
         private static void CreateDependencies(LightningBoltScript __instance)
         {
+            if (!LethalVisuals.LethalVisualsEnabled) return;
             if (!Config.Instance.RainbowZapGun.Value) return;
             // HSV instead of OKHSL :-(
             // I don't wanna reimplement it in C# instead of shadercode rightnow as the implementation is fairly involved (probably 300-500 lines)

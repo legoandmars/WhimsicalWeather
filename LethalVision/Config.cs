@@ -22,6 +22,7 @@ namespace LethalVision
         public ConfigEntry<bool> ClearMagnifyingGlass { get; set; }
         public ConfigEntry<bool> GooglyEyeDogs { get; set; }
         public ConfigEntry<bool> JesterHat { get; set; }
+        public ConfigEntry<bool> RainbowBlob { get; set; }
         public ConfigEntry<bool> RainbowItemDropship { get; set; }
 
         public Config(ConfigFile cfg)
@@ -109,6 +110,12 @@ namespace LethalVision
                 "Jester Hat",
                 true,
                 "Adds a jester hat to the jester's final form when using whimsical vision"
+            );
+            RainbowBlob = cfg.Bind(
+                "Modifications.Enemies",
+                "Rainbow Blob",
+                true,
+                "Make the Hygrodere's color rainbow over time when using whimsical vision"
             );
             RainbowItemDropship = cfg.Bind(
                 "Modifications.World",
