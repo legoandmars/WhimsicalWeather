@@ -89,6 +89,7 @@ namespace LethalVision.Visuals
         {
             _replacementController.ReplaceAll();
             WalkieTalkiePatches.SetWalkieLightIntensity(WalkieTalkiePatches.WalkieTalkieLightIntensityOverride);
+            ShovelPatches.ReplaceAllShovels();
         }
 
         private void UnreplaceVisuals()
@@ -100,6 +101,7 @@ namespace LethalVision.Visuals
 
             _replacementController.UnreplaceAll();
             WalkieTalkiePatches.SetWalkieLightIntensity(WalkieTalkiePatches.WalkieTalkieLightIntensityDefault);
+            ShovelPatches.RestoreAllShovels();
         }
 
         public void SetAudio(AudioClip sparkleAudio)

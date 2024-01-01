@@ -25,7 +25,10 @@ namespace LethalVision
         public static GameObject Rainbow;
         public static GameObject GooglyEyes;
         public static GameObject JesterHat;
+
         public static GameObject RedLollypop;
+        public static GameObject GrayLollypop;
+        public static GameObject YellowLollypop;
 
         public static GameObject VisualsObject;
         public static GameObjectActivityBehaviour WeatherEvents;
@@ -53,11 +56,17 @@ namespace LethalVision
             GooglyEyes = GetModelPrefabFromName("GooglyEyeHolder");
             JesterHat = GetModelPrefabFromName("JesterHat");
             RedLollypop = GetModelPrefabFromName("Lollypop");
+            GrayLollypop = GetModelPrefabFromName("GrayLollypop");
+            YellowLollypop = GetModelPrefabFromName("YellowLollypop");
 
             ReplaceShadersWithLit(GooglyEyes);
             ReplaceShadersWithLit(JesterHat);
             ReplaceShadersWithLit(RedLollypop);
+            ReplaceShadersWithLit(GrayLollypop);
+            ReplaceShadersWithLit(YellowLollypop);
             InitializeTransparentMaterial(RedLollypop, "LollypopTransparent");
+            InitializeTransparentMaterial(GrayLollypop, "GrayLollypopTransparent");
+            InitializeTransparentMaterial(YellowLollypop, "YellowLollypopTransparent");
 
             Harmony.CreateAndPatchAll(Assembly.GetExecutingAssembly());
 
