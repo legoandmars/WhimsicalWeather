@@ -16,7 +16,7 @@ namespace LethalVision.Patches
         [HarmonyPatch(typeof(GrabbableObject))]
         [HarmonyPatch("Start")]
         [HarmonyPostfix]
-        private static void StartPrefix(GrabbableObject __instance)
+        private static void StartPostfix(GrabbableObject __instance)
         {
             //   if (!LethalVisuals.LethalVisualsEnabled) return;
             if (!(__instance is Shovel shovel)) return;
@@ -26,6 +26,40 @@ namespace LethalVision.Patches
             if (_tracking)
             {
                 SetShovelVisuals(shovel, true);
+            }
+        }
+
+        // fix stop/yield sign reappearing on grab
+        [HarmonyPatch(typeof(GrabbableObject))]
+        [HarmonyPatch(nameof(GrabbableObject.EnableItemMeshes))]
+        [HarmonyPostfix]
+        private static void EnableItemMeshesPostfix(GrabbableObject __instance, ref bool enable)
+        {
+            if (!enable) return;
+            if (!(__instance is Shovel shovel)) return;
+            if (!LethalVisuals.LethalVisualsEnabled) return;
+
+            // used in stop sign/warn sign
+            if (shovel.gameObject.TryGetComponent(out MeshRenderer renderer))
+            {
+                renderer.enabled = false;
+            }
+        }
+
+        // fix stop/yield sign reappearing on grab
+        [HarmonyPatch(typeof(GrabbableObject))]
+        [HarmonyPatch(nameof(GrabbableObject.GrabItemOnClient))]
+        [HarmonyPatch(nameof(GrabbableObject.GrabItemFromEnemy))]
+        [HarmonyPostfix]
+        private static void EnableItemMeshesPostfix(GrabbableObject __instance)
+        {
+            if (!(__instance is Shovel shovel)) return;
+            if (!LethalVisuals.LethalVisualsEnabled) return;
+
+            // used in stop sign/warn sign
+            if (shovel.gameObject.TryGetComponent(out MeshRenderer renderer))
+            {
+                renderer.enabled = false;
             }
         }
 
@@ -69,7 +103,7 @@ namespace LethalVision.Patches
             var visuals = GetShovelVisuals(shovel);
             if (visuals == null) return;
 
-            var lollypop = UnityEngine.Object.Instantiate(Plugin.RedLollypop, visualsContainer.transform, false);
+            var lollypop = UnityEngine.Object.Instantiate(visuals, visualsContainer.transform, false);
             lollypop.transform.localPosition = Vector3.zero;
             lollypop.transform.localRotation = Quaternion.identity;
             lollypop.transform.localScale = Vector3.one;
@@ -99,9 +133,9 @@ namespace LethalVision.Patches
 
         private static GameObject? GetShovelVisuals(Shovel shovel)
         {
-            if (shovel.gameObject.name == "ShovelItem") return Plugin.GrayLollypop;
-            else if (shovel.gameObject.name == "YieldSign") return Plugin.YellowLollypop;
-            else if (shovel.gameObject.name == "StopSign") return Plugin.RedLollypop;
+            if (shovel.gameObject.name.StartsWith("ShovelItem")) return Plugin.GrayLollypop;
+            else if (shovel.gameObject.name.StartsWith("YieldSign")) return Plugin.YellowLollypop;
+            else if (shovel.gameObject.name.StartsWith("StopSign")) return Plugin.RedLollypop;
             return Plugin.RedLollypop;
         }
     }
