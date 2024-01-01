@@ -11,6 +11,9 @@ namespace LethalVision
         public ConfigEntry<bool> ChangePlayerPitch { get; set; }
         public ConfigEntry<float> PlayerPitchMultiplier { get; set; }
         public ConfigEntry<bool> RemovePlayerBlood { get; set; }
+        public ConfigEntry<bool> ChangeShipHornPitch { get; set; }
+        public ConfigEntry<float> ShipHornPitch { get; set; }
+        public ConfigEntry<float> ShipHornStartPitch { get; set; }
         public ConfigEntry<bool> LollypopMeleeWeapons { get; set; }
         public ConfigEntry<bool> GooglyEyeDogs { get; set; }
         public ConfigEntry<bool> JesterHat { get; set; }
@@ -34,6 +37,24 @@ namespace LethalVision
                 "Remove Player Blood",
                 true,
                 "Remove all player blood when using whimsical vision"
+            );
+            ChangeShipHornPitch = cfg.Bind(
+                "Modifications.Ship",
+                "Change Ship Horn Pitch",
+                true,
+                "Pitch up the ship's loud horn when using whimsical vision"
+            );
+            ShipHornPitch = cfg.Bind(
+                "Modifications.Ship",
+                "Ship Horn Maximum Pitch",
+                1.3f,
+                "The maximum pitch of the ship's loud horn when using whimsical vision. Does nothing if Change Ship Horn Pitch is disabled."
+            );
+            ShipHornStartPitch = cfg.Bind(
+                "Modifications.Ship",
+                "Ship Horn Minimum Pitch",
+                1.25f,
+                "The minimum/starting pitch of the ship's loud horn when using whimsical vision. Does nothing if Change Ship Horn Pitch is disabled."
             );
             LollypopMeleeWeapons = cfg.Bind(
                 "Modifications.Items",

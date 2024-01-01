@@ -39,12 +39,12 @@ namespace LethalVision.Patches
 
         public static float ModifiedHornPitch()
         {
-            return LethalVisuals.LethalVisualsEnabled ? 1.3f : 0.97f;
+            return LethalVisuals.LethalVisualsEnabled && Config.Instance.ChangeShipHornPitch.Value ? Config.Instance.ShipHornPitch.Value : 0.97f;
         }
 
         public static float ModifiedHornLowPitch()
         {
-            return LethalVisuals.LethalVisualsEnabled ? 1.25f : 0.88f;
+            return LethalVisuals.LethalVisualsEnabled && Config.Instance.ChangeShipHornPitch.Value ? Config.Instance.ShipHornStartPitch.Value : 0.88f;
         }
     }
 }
