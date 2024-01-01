@@ -16,6 +16,7 @@ namespace LethalVision.Patches
         {
             if (!LethalVisuals.LethalVisualsEnabled) return;
             if (Plugin.JesterHat == null) return;
+            if (!Config.Instance.JesterHat.Value) return;
 
             var hatParent = __instance.transform.Find("MeshContainer/AnimContainer/metarig/BoxContainer/spine.004/spine.005/spine.006/UpperJaw");
             if (hatParent == null) return;

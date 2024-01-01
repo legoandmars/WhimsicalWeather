@@ -8,23 +8,50 @@ namespace LethalVision
     public class Config
     {
         public static Config Instance;
+        public ConfigEntry<bool> ChangePlayerPitch { get; set; }
+        public ConfigEntry<float> PlayerPitchMultiplier { get; set; }
         public ConfigEntry<bool> RemovePlayerBlood { get; set; }
         public ConfigEntry<bool> LollypopMeleeWeapons { get; set; }
+        public ConfigEntry<bool> GooglyEyeDogs { get; set; }
+        public ConfigEntry<bool> JesterHat { get; set; }
 
         public Config(ConfigFile cfg)
         {
+            ChangePlayerPitch = cfg.Bind(
+                "Modifications.Player",
+                "Change Player Pitch",
+                true,
+                "Pitch up the voice chat of other players when using whimsical vision"
+            );
+            PlayerPitchMultiplier = cfg.Bind(
+                "Modifications.Player",
+                "Player Pitch Multiplier",
+                1.3f,
+                "The amount player voice chat pitch is multplied when using whimsical vision. Does nothing if Change Player Pitch is disabled."
+            );
             RemovePlayerBlood = cfg.Bind(
-                "Modifications",
+                "Modifications.Player",
                 "Remove Player Blood",
                 true,
                 "Remove all player blood when using whimsical vision"
             );
-
             LollypopMeleeWeapons = cfg.Bind(
-                "Modifications",
+                "Modifications.Items",
                 "Lollypop Melee Weapons",
                 true,
                 "Replace melee weapons (Shovel, Stop Sign, Yield Sign) with lollypops when using whimsical vision"
+            );
+            GooglyEyeDogs = cfg.Bind(
+                "Modifications.Enemies",
+                "Googly Eye Dogs",
+                true,
+                "Adds googly eyes to eyeless dogs when using whimsical vision"
+            );
+            JesterHat = cfg.Bind(
+                "Modifications.Enemies",
+                "Jester Hat",
+                true,
+                "Adds a jester hat to the jester's final form when using whimsical vision"
             );
 
             Instance = this;

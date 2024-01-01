@@ -13,8 +13,6 @@ namespace LethalVision.Patches
     [HarmonyPatch]
     internal class VoicePitchPatches
     {
-        private const float _maxVoicePitchAddAmount = 0.3f; // may need some balance changes, I'm not sure if this too much. I still want the game to be playable, just a bit harder
-
         private static MethodInfo _modifiedVoiceTargetsMethod = AccessTools.Method(typeof(VoicePitchPatches), "ModifiedPlayerVoicePitches");
         private static float _voicePitchAddAmount = 0f;
 
@@ -36,7 +34,7 @@ namespace LethalVision.Patches
 
         public static float[] ModifiedPlayerVoicePitches(SoundManager soundManager)
         {
-            if (LethalVisuals.LethalVisualsEnabled)
+            if (LethalVisuals.LethalVisualsEnabled && Config.Instance.ChangePlayerPitch.Value)
             {
                 return soundManager.playerVoicePitchTargets.Select(x => x + _voicePitchAddAmount).ToArray();
             }
@@ -48,7 +46,7 @@ namespace LethalVision.Patches
 
         public static void SetVoicePitchOverridePercent(float percent)
         {
-            _voicePitchAddAmount = percent * _maxVoicePitchAddAmount;
+            _voicePitchAddAmount = percent * (Config.Instance.PlayerPitchMultiplier.Value - 1);
         }
     }
 }

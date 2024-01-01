@@ -18,6 +18,7 @@ namespace LethalVision.Patches
         {
             if (!LethalVisuals.LethalVisualsEnabled) return;
             if (Plugin.GooglyEyes == null) return;
+            if (!Config.Instance.GooglyEyeDogs.Value) return;
 
             var eyesParent = __instance.transform.Find("MouthDogModel/AnimContainer/Armature/Neck1Container/Neck1/Neck2/JawUpper");
             if (eyesParent == null) return;
