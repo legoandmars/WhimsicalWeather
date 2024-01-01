@@ -23,6 +23,7 @@ namespace LethalVision
         public static GameObject SparkParticles;
         public static GameObject Rainbow;
         public static GameObject GooglyEyes;
+        public static GameObject JesterHat;
 
         public static GameObject VisualsObject;
         public static GameObjectActivityBehaviour WeatherEvents;
@@ -48,8 +49,10 @@ namespace LethalVision
             SparkParticles = GetModelPrefabFromName("Sparticles");
             Rainbow = GetModelPrefabFromName("rainbow");
             GooglyEyes = GetModelPrefabFromName("GooglyEyeHolder");
+            JesterHat = GetModelPrefabFromName("JesterHat");
 
             ReplaceShadersWithLit(GooglyEyes);
+            ReplaceShadersWithLit(JesterHat);
 
             Harmony.CreateAndPatchAll(Assembly.GetExecutingAssembly());
 
