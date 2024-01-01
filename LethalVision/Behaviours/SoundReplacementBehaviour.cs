@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LethalVision.Models;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using UnityEngine;
@@ -10,5 +11,6 @@ namespace LethalVision.Behaviours
     {
         public AudioClip ReplacementClip;
         public string SoundName;
+        public SoundReplacementType SoundReplacementType = SoundReplacementType.OneShotAudio;
     }
 }

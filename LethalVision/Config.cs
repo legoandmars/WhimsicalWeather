@@ -13,6 +13,7 @@ namespace LethalVision
         public ConfigEntry<bool> ChangePlayerPitch { get; set; }
         public ConfigEntry<float> PlayerPitchMultiplier { get; set; }
         public ConfigEntry<bool> RemovePlayerBlood { get; set; }
+        public ConfigEntry<bool> FearLaughing { get; set; }
         public ConfigEntry<bool> ChangeShipHornPitch { get; set; }
         public ConfigEntry<float> ShipHornPitch { get; set; }
         public ConfigEntry<float> ShipHornStartPitch { get; set; }
@@ -56,6 +57,12 @@ namespace LethalVision
                 "Remove Player Blood",
                 true,
                 "Remove all player blood when using whimsical vision"
+            );
+            FearLaughing = cfg.Bind(
+                "Modifications.Player",
+                "Fear Laughing",
+                true,
+                "Have the player laugh to themselves when fear is high using whimsical vision"
             );
             ChangeShipHornPitch = cfg.Bind(
                 "Modifications.Ship",

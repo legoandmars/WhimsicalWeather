@@ -80,6 +80,9 @@ namespace LethalVision.Visuals
 
                 _animationProgress += Time.deltaTime;
             }
+
+            if (SoundManager.Instance == null) return;
+            Debug.Log($"{SoundManager.Instance.highAction1audible} {SoundManager.Instance.highAction2audible} {SoundManager.Instance.lowActionAudible}");
         }
 
         public static void ToggleVisualsEvent(bool enabled)

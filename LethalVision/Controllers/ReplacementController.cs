@@ -52,12 +52,18 @@ namespace LethalVision.Controllers
 
         private List<ImageShaderReplacement> _imageShaderReplacements = new();
 
-        // works differently as-is because it's only changing PlayOneShot and nothing is being permanently patched
+        // includes all sound replacements, including playoneshot
         private List<SoundReplacementBehaviour> _soundReplacements = new();
+
+        // cached to not use linq every time a sound plays
+        private List<SoundReplacementBehaviour> _oneShotSoundReplacements = new();
+
+        private AudioClip? _highAction1Clip;
 
         public void CreateSoundReplacements(List<SoundReplacementBehaviour> soundReplacements)
         {
             _soundReplacements = soundReplacements;
+            _oneShotSoundReplacements = _soundReplacements.Where(x => x.SoundReplacementType == SoundReplacementType.OneShotAudio).ToList();
         }
 
         public void CreateTextureReplacements(List<TextureReplacementBehaviour> textureReplacements)
@@ -131,6 +137,20 @@ namespace LethalVision.Controllers
                     imageReplacement.ReplaceImageShaderIfMatch(image);
                 }
             }
+
+            foreach (var soundReplacement in _soundReplacements)
+            {
+                if (soundReplacement.SoundReplacementType == SoundReplacementType.SoundManagerHighAction1 && SoundManager.Instance != null)
+                {
+                    _highAction1Clip = SoundManager.Instance.highAction1.clip;
+                    SoundManager.Instance.highAction1.clip = soundReplacement.ReplacementClip;
+                    if (!GameNetworkManager.Instance.localPlayerController.isPlayerDead)
+                    {
+                        SoundManager.Instance.highAction1.Stop();
+                        SoundManager.Instance.highAction1.Play();
+                    }
+                }
+            }
         }
 
         public void UnreplaceAll()
@@ -143,13 +163,52 @@ namespace LethalVision.Controllers
             {
                 imageShaderReplacement.RestoreImageShaders();
             }
+
+            foreach (var soundReplacement in _soundReplacements)
+            {
+                if (soundReplacement.SoundReplacementType == SoundReplacementType.SoundManagerHighAction1 && SoundManager.Instance != null)
+                {
+                    SoundManager.Instance.highAction1.clip = _highAction1Clip;
+                    _highAction1Clip = null;
+                    if (!GameNetworkManager.Instance.localPlayerController.isPlayerDead)
+                    {
+                        SoundManager.Instance.highAction1.Stop();
+                        SoundManager.Instance.highAction1.Play();
+                    }
+                }
+            }
+        }
+
+        private void ReplaceCustomSounds(bool enabled)
+        {
+            foreach (var soundReplacement in _soundReplacements)
+            {
+                if (soundReplacement.SoundReplacementType == SoundReplacementType.SoundManagerHighAction1 && Config.Instance.FearLaughing.Value && SoundManager.Instance != null)
+                {
+                    if (enabled)
+                    {
+                        _highAction1Clip = SoundManager.Instance.highAction1.clip;
+                        SoundManager.Instance.highAction1.clip = soundReplacement.ReplacementClip;
+                    }
+                    else
+                    {
+                        SoundManager.Instance.highAction1.clip = _highAction1Clip;
+                        _highAction1Clip = null;
+                    }
+                    if (!GameNetworkManager.Instance.localPlayerController.isPlayerDead)
+                    {
+                        SoundManager.Instance.highAction1.Stop();
+                        SoundManager.Instance.highAction1.Play();
+                    }
+                }
+            }
         }
 
         public void ReplaceSoundIfNeeded(ref AudioClip clip)
         {
             if (clip == null) return;
             string clipName = clip.name;
-            var newClip = _soundReplacements.FirstOrDefault(x => x.SoundName == clipName);
+            var newClip = _oneShotSoundReplacements.FirstOrDefault(x => x.SoundName == clipName);
 
             if (newClip == null) return;
             clip = newClip.ReplacementClip;
