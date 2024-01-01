@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 namespace LethalVision.Models
 {
@@ -12,12 +13,14 @@ namespace LethalVision.Models
         private Texture _replacement;
         private string _materialName;
         private string _propertyName;
+        private bool _forceTransparentLayer;
 
         public TextureReplacement(TextureReplacementBehaviour textureReplacement)
         {
             _replacement = textureReplacement.Texture;
             _materialName = textureReplacement.MaterialName;
             _propertyName = textureReplacement.PropertyName;
+            _forceTransparentLayer = textureReplacement.ForceTransparentLayer;
         }
 
         public override bool MaterialIsMatch(Material material)
@@ -42,6 +45,10 @@ namespace LethalVision.Models
             _originalTexturesByMaterial.Add(material, material.GetTexture(_propertyName));
 
             material.SetTexture(_propertyName, _replacement);
+            if (_forceTransparentLayer)
+            {
+                material.renderQueue = (int)RenderQueue.Transparent;
+            }
         }
 
         public override void RestoreMaterials()
@@ -50,6 +57,10 @@ namespace LethalVision.Models
             {
                 if (material == null) continue;
                 material.SetTexture(_propertyName, _originalTexturesByMaterial[material]); // texture set could be null, which will be blank
+                if (_forceTransparentLayer)
+                {
+                    material.renderQueue = material.rawRenderQueue;
+                }
             }
 
             _replacedMaterials.Clear();

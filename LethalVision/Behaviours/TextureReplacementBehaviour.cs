@@ -11,5 +11,6 @@ namespace LethalVision.Behaviours
         public Texture Texture;
         public string MaterialName;
         public string PropertyName;
+        public bool ForceTransparentLayer;
     }
 }
