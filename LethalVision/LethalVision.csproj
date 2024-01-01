@@ -33,9 +33,6 @@
 		<Reference Include="LethalLib">
 		  <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Lethal Company\BepInEx\plugins\Evaisa-LethalLib\LethalLib\LethalLib.dll</HintPath>
 		</Reference>
-		<Reference Include="UniTask">
-		  <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Lethal Company\BepInEx\core\Bobbie-UniTask\UniTask.dll</HintPath>
-		</Reference>
 		<Reference Include="Unity.Netcode.Runtime">
 			<HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Lethal Company\Lethal Company_Data\Managed\Unity.Netcode.Runtime.dll</HintPath>
 		</Reference>

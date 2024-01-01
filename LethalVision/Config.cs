@@ -48,7 +48,7 @@ namespace LethalVision
                 "Modifications.Player",
                 "Player Pitch Multiplier",
                 1.3f,
-                "The amount player voice chat pitch is multplied when using whimsical vision. Does nothing if Change Player Pitch is disabled"
+                "The amount player voice chat pitch is multiplied when using whimsical vision. Does nothing if Change Player Pitch is disabled"
             );
             RemovePlayerBlood = cfg.Bind(
                 "Modifications.Player",
