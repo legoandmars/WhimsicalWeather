@@ -71,16 +71,22 @@ namespace LethalVision.Controllers
                 if (particleMaterialName == "SparkParticle" && !Config.Instance.RainbowZapGun.Value) continue;
                 _materialReplacements.Add(new MaterialNameShaderReplacement(Plugin.RainbowParticleShader, particleMaterialName, true));
             }
-
-            _materialReplacements.Add(new MaterialNameShaderReplacement(Plugin.RainbowDropshipLightsShader, "LEDLightYellow", false)); // item dropship lights
-            _materialReplacements.Add(new ColorReplacement(new Color(0.9f, 0, 0, 1), "LEDLightYellow", "_Color")); // make item dropship lights more vibrant
-            _materialReplacements.Add(new ColorReplacement(new Color(0, 0, 0.2f, 0.3f), "GlassTex", "_BaseColor")); // make magnifying glass more clear
-            _materialReplacements.Add(new FloatReplacement(0.85f, "GlassTex", "_Smoothness")); // make magnifying glass less blurry
-
-            _materialReplacements.Add(new MaterialNameShaderReplacement(Plugin.RainbowUIShader, "TankLight", false)); // apparatus light
-            _materialReplacements.Add(new ColorReplacement(new Color(0.8f, 0, 0, 1), "TankLight", "_Color")); // apparatus light brightness
-            _materialReplacements.Add(new FloatReplacement(5f, "TankLight", "_HueShiftSpeed")); // apparatus light speed
-
+            if (Config.Instance.RainbowItemDropship.Value)
+            {
+                _materialReplacements.Add(new MaterialNameShaderReplacement(Plugin.RainbowDropshipLightsShader, "LEDLightYellow", false)); // item dropship lights
+                _materialReplacements.Add(new ColorReplacement(new Color(0.9f, 0, 0, 1), "LEDLightYellow", "_Color")); // make item dropship lights more vibrant
+            }
+            if (Config.Instance.ClearMagnifyingGlass.Value)
+            {
+                _materialReplacements.Add(new ColorReplacement(new Color(0, 0, 0.2f, 0.3f), "GlassTex", "_BaseColor")); // make magnifying glass more clear
+                _materialReplacements.Add(new FloatReplacement(0.85f, "GlassTex", "_Smoothness")); // make magnifying glass less blurry
+            }
+            if (Config.Instance.RainbowApparatus.Value)
+            {
+                _materialReplacements.Add(new MaterialNameShaderReplacement(Plugin.RainbowUIShader, "TankLight", false)); // apparatus light
+                _materialReplacements.Add(new ColorReplacement(new Color(0.8f, 0, 0, 1), "TankLight", "_Color")); // apparatus light brightness
+                _materialReplacements.Add(new FloatReplacement(5f, "TankLight", "_HueShiftSpeed")); // apparatus light speed
+            }
         }
 
         public void CreateImageShaderReplacements()

@@ -18,8 +18,11 @@ namespace LethalVision
         public ConfigEntry<float> ShipHornStartPitch { get; set; }
         public ConfigEntry<bool> LollypopMeleeWeapons { get; set; }
         public ConfigEntry<bool> RainbowZapGun { get; set; }
+        public ConfigEntry<bool> RainbowApparatus { get; set; }
+        public ConfigEntry<bool> ClearMagnifyingGlass { get; set; }
         public ConfigEntry<bool> GooglyEyeDogs { get; set; }
         public ConfigEntry<bool> JesterHat { get; set; }
+        public ConfigEntry<bool> RainbowItemDropship { get; set; }
 
         public Config(ConfigFile cfg)
         {
@@ -83,6 +86,18 @@ namespace LethalVision
                 true,
                 "Make the zap gun's color rainbow over time when using whimsical vision"
             );
+            RainbowApparatus = cfg.Bind(
+                "Modifications.Items",
+                "Rainbow Apparatus",
+                true,
+                "Make the apparatus's color rainbow over time when using whimsical vision"
+            );
+            ClearMagnifyingGlass = cfg.Bind(
+                "Modifications.Items",
+                "Magnifying Glass Shows Reality",
+                true,
+                "Make the magnifying glass show a clear picture of reality when using whimsical vision"
+            );
             GooglyEyeDogs = cfg.Bind(
                 "Modifications.Enemies",
                 "Googly Eye Dogs",
@@ -94,6 +109,12 @@ namespace LethalVision
                 "Jester Hat",
                 true,
                 "Adds a jester hat to the jester's final form when using whimsical vision"
+            );
+            RainbowItemDropship = cfg.Bind(
+                "Modifications.World",
+                "Rainbow Item Dropship",
+                true,
+                "Adds rainbow christmas lights to the item dropship when using whimsical vision"
             );
 
             Instance = this;
