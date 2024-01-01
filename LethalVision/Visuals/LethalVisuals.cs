@@ -52,7 +52,7 @@ namespace LethalVision.Visuals
 
         private void Update()
         {
-            if (BepInEx.UnityInput.Current.GetKeyDown(KeyCode.Q))
+            if (BepInEx.UnityInput.Current.GetKeyDown(KeyCode.F10))
             {
                 ToggleVisualsEvent(!_enabled);
             }
@@ -196,8 +196,6 @@ namespace LethalVision.Visuals
         {
             var localPlayer = StartOfRound.Instance?.localPlayerController;
             if (localPlayer == null) return;
-            Debug.Log("AUDIO:");
-            Debug.Log(_sparkleAudio.name);
             localPlayer.itemAudio.PlayOneShot(_sparkleAudio);
         }
 
