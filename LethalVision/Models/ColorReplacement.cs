@@ -33,7 +33,7 @@ namespace LethalVision.Models
         {
             if (!material.HasColor(_colorName))
             {
-                Debug.LogWarning($"Attempted to replace color on {material.name} but color {_colorName} does not exist!");
+                Plugin.Logger.LogWarning($"Attempted to replace color on {material.name} but color {_colorName} does not exist!");
                 return;
             }
             if (_replacedMaterials.Contains(material)) return;

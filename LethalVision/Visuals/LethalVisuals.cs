@@ -82,7 +82,6 @@ namespace LethalVision.Visuals
             }
 
             if (SoundManager.Instance == null) return;
-            Debug.Log($"{SoundManager.Instance.highAction1audible} {SoundManager.Instance.highAction2audible} {SoundManager.Instance.lowActionAudible}");
         }
 
         public static void ToggleVisualsEvent(bool enabled)
@@ -117,7 +116,7 @@ namespace LethalVision.Visuals
 
         public void Enable()
         {
-            Debug.Log("Enabling LethalVisuals.");
+            Plugin.Logger.LogInfo("Enabling LethalVisuals.");
             _enabled = true;
             LethalVisualsEnabled = true;
 
@@ -163,7 +162,7 @@ namespace LethalVision.Visuals
         }
         public void Disable()
         {
-            Debug.Log("Disabling LethalVisuals.");
+            Plugin.Logger.LogInfo("Disabling LethalVisuals.");
             _enabled = false;
             LethalVisualsEnabled = false;
 

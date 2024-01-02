@@ -36,7 +36,7 @@ namespace LethalVision.Models
         {
             if (!material.HasProperty(_propertyName))
             {
-                Debug.LogWarning($"Attempted to replace texture on {material.name} but property {_propertyName} does not exist!");
+                Plugin.Logger.LogWarning($"Attempted to replace texture on {material.name} but property {_propertyName} does not exist!");
                 return;
             }
             if (_replacedMaterials.Contains(material)) return;

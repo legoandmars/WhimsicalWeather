@@ -32,7 +32,7 @@ namespace LethalVision.Models
         {
             if (!material.HasFloat(_floatName))
             {
-                Debug.LogWarning($"Attempted to replace float on {material.name} but float {_floatName} does not exist!");
+                Plugin.Logger.LogWarning($"Attempted to replace float on {material.name} but float {_floatName} does not exist!");
                 return;
             }
             if (_replacedMaterials.Contains(material)) return;

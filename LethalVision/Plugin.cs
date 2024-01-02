@@ -1,4 +1,5 @@
 ﻿using BepInEx;
+using BepInEx.Logging;
 using HarmonyLib;
 using LethalVision.Behaviours;
 using LethalVision.Visuals;
@@ -14,6 +15,8 @@ namespace LethalVision
     [BepInPlugin(MyPluginInfo.PLUGIN_GUID, MyPluginInfo.PLUGIN_NAME, MyPluginInfo.PLUGIN_VERSION)]
     public class Plugin : BaseUnityPlugin
     {
+        public static new ManualLogSource Logger;
+
         public static Material PassMaterial;
         public static Shader RainbowTextShader;
         public static Shader RainbowUIShader;
@@ -39,6 +42,7 @@ namespace LethalVision
 
         private void Awake()
         {
+            Logger = base.Logger;
             // Plugin startup logic
             Logger.LogInfo($"Plugin {MyPluginInfo.PLUGIN_GUID} is loaded!");
             new Config(Config);
@@ -129,7 +133,7 @@ namespace LethalVision
         {
             if (_litShader == null)
             {
-                Debug.LogWarning("Cannot find HDRP/Lit");
+                Plugin.Logger.LogWarning("Cannot find HDRP/Lit");
                 return;
             }
 

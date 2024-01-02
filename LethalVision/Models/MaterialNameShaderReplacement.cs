@@ -38,8 +38,6 @@ namespace LethalVision.Models
                 if (material.shader.name == "HDRP/Unlit")
                 {
                     var texture = material.GetTexture("_UnlitColorMap");
-                    Debug.Log(texture);
-                    Debug.Log("aaaa");
                     material.shader = _replacement;
                     material.SetTexture("_BaseColorMap", texture);
                 }

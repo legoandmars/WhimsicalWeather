@@ -28,7 +28,6 @@ namespace LethalVision.Patches
             foreach (var walkie in WalkieTalkie.allWalkieTalkies)
             {
                 if (walkie == null || walkie.walkieTalkieLight == null) continue;
-                Debug.Log(walkie.walkieTalkieLight.intensity);
                 walkie.walkieTalkieLight.intensity = intensity;
             }
         }

@@ -25,7 +25,6 @@ namespace LethalVision.Patches
             if (!LethalVisuals.LethalVisualsEnabled) return;
             if (_replacementController == null) return;
             if (clip == null || clip.name == null) return;
-            // Debug.Log(clip.name);
             if (clip.name == "ShovelHitDefault" || clip.name == "ShovelHitDefault2")
             {
                 if (!Config.Instance.LollypopMeleeWeapons.Value) return;
