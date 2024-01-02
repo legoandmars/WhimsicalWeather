@@ -35,9 +35,10 @@ namespace LethalVision.Controllers
             "SpeakingSymbol", // spectate voice chat activity
             "CircleMeterOutline", // interaction circle
             "CircleMeterFill",
-            "BGBoxes", // endgame stats background
+            "endgameStatsBG", // endgame stats background
             "endgameStatsBoxes",
-            "endgameAllPlayersDead"
+            "endgameAllPlayersDead",
+            "shipClockIcon"
         };
 
         // use "/" to denote parent gameObject
@@ -50,7 +51,11 @@ namespace LethalVision.Controllers
             "PleaseConfirmChangesPanel/Panel",
             "Symbol", // endgame stats "deceased"/checkmark image 
             "DividingLine", // used in profitquota/endgamestats/rewardsscreen 
-            "Container2/Image" // rewards screen background
+            "Container2/Image", // rewards screen background
+            "LevelUp/Image", // level up upper background
+            "LevelUp/Image (2)", // level up background
+            "LevelUp/LevelUpMeter", // level up meter. this may be able to use the sprite name, but i'm not sure if it's used elsewhere
+            "Penalty/Image"
         };
 
         private static List<string> _particleMaterialNames = new()
