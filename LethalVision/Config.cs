@@ -25,6 +25,7 @@ namespace LethalVision
         public ConfigEntry<bool> JesterHat { get; set; }
         public ConfigEntry<bool> RainbowBlob { get; set; }
         public ConfigEntry<bool> RainbowItemDropship { get; set; }
+        public ConfigEntry<bool> DeveloperToggle { get; set; }
 
         public Config(ConfigFile cfg)
         {
@@ -129,6 +130,12 @@ namespace LethalVision
                 "Rainbow Item Dropship",
                 true,
                 "Adds rainbow christmas lights to the item dropship when using whimsical vision"
+            );
+            DeveloperToggle = cfg.Bind(
+                "Other.Development",
+                "Manual Whimsical Vision Toggle",
+                false,
+                "Allows you to press F10 to manually enable/disable whimsical vision. Do NOT enable this unless you know what you're doing"
             );
 
             Instance = this;

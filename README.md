@@ -9,11 +9,12 @@ When in "Whimsical Vision", this mod has many visual changes, many of which have
 - Rainbow UI and text (with configurable speed)
 - Disabled blood/gore
 - Changes to the following items: Walkie Talkie, 7Ball, ZapGun, Magnifying Glass, Apparatus, Shovel, Stop Sign, Yield Sign
-- Changes to the following ship objects: Manual, Sticky Note, Teleporter, Inverse Teleporter, Ship Horn
-- Changes to the following enemies: Eyeless Dogs, Jester, Hygrodere
+- Changes to the following ship objects: Manual, Sticky Note, Teleporter, Inverse Teleporter, Ship Horn, Jack O Lantern
+- Changes to the following enemies: Eyeless Dog, Jester, Hygrodere
 - Rainbow item dropship lights
 - Pitched up voice chat (with configurable pitch)
 - A laughing sound effect when the game's fear effect plays
+- Giant rainbow added to maps with whimsical weather
 
 All changes are completely reversible, and will exclusively effect your game when in Whimsical Vision.
 ## Credits

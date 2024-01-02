@@ -52,7 +52,7 @@ namespace LethalVision.Visuals
 
         private void Update()
         {
-            if (BepInEx.UnityInput.Current.GetKeyDown(KeyCode.F10))
+            if (Config.Instance.DeveloperToggle.Value && BepInEx.UnityInput.Current.GetKeyDown(KeyCode.F10))
             {
                 ToggleVisualsEvent(!_enabled);
             }
