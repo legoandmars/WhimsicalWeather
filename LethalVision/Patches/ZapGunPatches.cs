@@ -12,7 +12,7 @@ using static UnityEngine.ParticleSystem;
 namespace LethalVision.Patches
 {
     [HarmonyPatch]
-    internal class LightningBoltPatch
+    internal class ZapGunPatches
     {
         private static int _tintColorProperty = Shader.PropertyToID("_TintColor");
 

@@ -12,7 +12,7 @@ using UnityEngine.UI;
 namespace LethalVision.Patches
 {
     [HarmonyPatch(typeof(PlayerControllerB))]
-    internal class PlayerControllerPatch
+    internal class PlayerControllerPatches
     {
         [HarmonyPatch("Start")]
         [HarmonyPrefix]
