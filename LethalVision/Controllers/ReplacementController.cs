@@ -14,8 +14,12 @@ namespace LethalVision.Controllers
     {
         private static List<string> _imageSpriteNames = new()
         {
-            "DialogueBox1Frame 2", // used for chat menu, inventory slots, etc
-            "DialogueBox1Frame 3", // also used for chat menu maybe?
+            "DialogueBox1Frame 1", // used for chat menu, inventory slots, etc
+            "DialogueBox1Frame 2", 
+            "DialogueBox1Frame 3", 
+            "DialogueBox1Frame 4",
+            "DialogueBox1Frame 5", // not 100% sure what 5 and 6 are used for
+            "DialogueBox1Frame 6",
             "SprintMeter",
             "scanCircle1",
             "scanCircle2",
@@ -28,7 +32,12 @@ namespace LethalVision.Controllers
             "timeIcon2", 
             "timeIcon3",
             "timeIcon3b",
-            "SpeakingSymbol" // spectate voice chat activity
+            "SpeakingSymbol", // spectate voice chat activity
+            "CircleMeterOutline", // interaction circle
+            "CircleMeterFill",
+            "BGBoxes", // endgame stats background
+            "endgameStatsBoxes",
+            "endgameAllPlayersDead"
         };
 
         // use "/" to denote parent gameObject
@@ -38,7 +47,10 @@ namespace LethalVision.Controllers
             "SubTextBox", // scan node price background
             "Panel (2)", // pause menu background
             "Panel (1)", // pause menu outer decoration
-            "PleaseConfirmChangesPanel/Panel"
+            "PleaseConfirmChangesPanel/Panel",
+            "Symbol", // endgame stats "deceased"/checkmark image 
+            "DividingLine", // used in profitquota/endgamestats/rewardsscreen 
+            "Container2/Image" // rewards screen background
         };
 
         private static List<string> _particleMaterialNames = new()
