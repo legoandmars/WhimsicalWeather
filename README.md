@@ -3,6 +3,8 @@ Adds a new pyrovision-inspired weather type to Lethal Company.
 
 Made solo over the course of a week for the [2023 Lethal Company Modjam](https://itch.io/jam/2023-lethal-company-modjam).
 
+**⚠️ WARNING:** This mod features flashing lights that may potentially trigger seizures in people with photosensitive epilepsy.
+
 ## Features
 When in "Whimsical Vision", this mod has many visual changes, many of which have config options:
 - Custom postprocessing shader
