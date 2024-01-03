@@ -31,109 +31,109 @@ namespace WhimsicalWeather
         {
             RainbowUI = cfg.Bind(
                 "Modifications",
-                "Rainbow UI",
+                "RainbowUI",
                 true,
                 "Make the UI cycle through rainbow colors when using whimsical vision"
             );
             RainbowUIHueShiftSpeed = cfg.Bind(
                 "Modifications",
-                "Rainbow UI Speed",
+                "RainbowUISpeed",
                 1f,
                 "How fast to cycle the UI's colors when using whimsical vision. Does nothing if Rainbow UI is disabled"
             );
             ChangePlayerPitch = cfg.Bind(
                 "Modifications.Player",
-                "Change Player Pitch",
+                "ChangePlayerPitch",
                 true,
                 "Pitch up the voice chat of other players when using whimsical vision"
             );
             PlayerPitchMultiplier = cfg.Bind(
                 "Modifications.Player",
-                "Player Pitch Multiplier",
+                "PlayerPitchMultiplier",
                 1.3f,
                 "The amount player voice chat pitch is multiplied when using whimsical vision. Does nothing if Change Player Pitch is disabled"
             );
             RemovePlayerBlood = cfg.Bind(
                 "Modifications.Player",
-                "Remove Player Blood",
+                "RemovePlayerBlood",
                 true,
                 "Remove all player blood when using whimsical vision"
             );
             FearLaughing = cfg.Bind(
                 "Modifications.Player",
-                "Fear Laughing",
+                "FearLaughing",
                 true,
                 "Have the player laugh to themselves when fear is high using whimsical vision"
             );
             ChangeShipHornPitch = cfg.Bind(
                 "Modifications.Ship",
-                "Change Ship Horn Pitch",
+                "ChangeShipHornPitch",
                 true,
                 "Pitch up the ship's loud horn when using whimsical vision"
             );
             ShipHornPitch = cfg.Bind(
                 "Modifications.Ship",
-                "Ship Horn Maximum Pitch",
+                "ShipHornMaximumPitch",
                 1.3f,
                 "The maximum pitch of the ship's loud horn when using whimsical vision. Does nothing if Change Ship Horn Pitch is disabled"
             );
             ShipHornStartPitch = cfg.Bind(
                 "Modifications.Ship",
-                "Ship Horn Minimum Pitch",
+                "ShipHornMinimumPitch",
                 1.25f,
                 "The minimum/starting pitch of the ship's loud horn when using whimsical vision. Does nothing if Change Ship Horn Pitch is disabled"
             );
             LollypopMeleeWeapons = cfg.Bind(
                 "Modifications.Items",
-                "Lollypop Melee Weapons",
+                "LollypopMeleeWeapons",
                 true,
                 "Replace melee weapons (Shovel, Stop Sign, Yield Sign) with lollypops when using whimsical vision"
             );
             RainbowZapGun = cfg.Bind(
                 "Modifications.Items",
-                "Rainbow Zap Gun",
+                "RainbowZapGun",
                 true,
                 "Make the zap gun's color rainbow over time when using whimsical vision"
             );
             RainbowApparatus = cfg.Bind(
                 "Modifications.Items",
-                "Rainbow Apparatus",
+                "RainbowApparatus",
                 true,
                 "Make the apparatus's color rainbow over time when using whimsical vision"
             );
             ClearMagnifyingGlass = cfg.Bind(
                 "Modifications.Items",
-                "Magnifying Glass Shows Reality",
+                "MagnifyingGlassShowsReality",
                 true,
                 "Make the magnifying glass show a clear picture of reality when using whimsical vision"
             );
             GooglyEyeDogs = cfg.Bind(
                 "Modifications.Enemies",
-                "Googly Eye Dogs",
+                "GooglyEyeDogs",
                 true,
                 "Adds googly eyes to eyeless dogs when using whimsical vision"
             );
             JesterHat = cfg.Bind(
                 "Modifications.Enemies",
-                "Jester Hat",
+                "JesterHat",
                 true,
                 "Adds a jester hat to the jester's final form when using whimsical vision"
             );
             RainbowBlob = cfg.Bind(
                 "Modifications.Enemies",
-                "Rainbow Blob",
+                "RainbowBlob",
                 true,
                 "Make the Hygrodere's color rainbow over time when using whimsical vision"
             );
             RainbowItemDropship = cfg.Bind(
                 "Modifications.World",
-                "Rainbow Item Dropship",
+                "RainbowItemDropship",
                 true,
                 "Adds rainbow christmas lights to the item dropship when using whimsical vision"
             );
             DeveloperToggle = cfg.Bind(
                 "Other.Development",
-                "Manual Whimsical Vision Toggle",
+                "ManualWhimsicalVisionToggle",
                 false,
                 "Allows you to press F10 to manually enable/disable whimsical vision. Do NOT enable this unless you know what you're doing"
             );
