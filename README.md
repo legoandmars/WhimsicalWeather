@@ -5,6 +5,12 @@ Made solo over the course of a week for the [2023 Lethal Company Modjam](https:/
 
 **⚠️ WARNING:** This mod features flashing lights that may potentially trigger seizures in people with photosensitive epilepsy.
 
+## Installation 
+
+It is **highly** recommended to install this using r2modman through the mod's [Thunderstore page](https://thunderstore.io/c/lethal-company/p/Bobbie/WhimsicalWeather/)​. If you're not sure how to use r2modman, check out the guide on [lethal.wiki](https://lethal.wiki)​.
+
+If you're installing manually, this mod requires [BepInEx​](https://thunderstore.io/c/lethal-company/p/BepInEx/BepInExPack/) and the latest version of [LethalLib​](https://thunderstore.io/c/lethal-company/p/Evaisa/LethalLib/).
+
 ## Preview
 ![Outdoor Example](https://owo.whats-th.is/6BScDkp.png)
 ![Indoor Example](https://owo.whats-th.is/4xoviDE.png)
