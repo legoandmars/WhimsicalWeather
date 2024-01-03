@@ -5,6 +5,10 @@ Made solo over the course of a week for the [2023 Lethal Company Modjam](https:/
 
 **⚠️ WARNING:** This mod features flashing lights that may potentially trigger seizures in people with photosensitive epilepsy.
 
+## Preview
+![Outdoor Example](https://owo.whats-th.is/6BScDkp.png)
+![Indoor Example](https://owo.whats-th.is/4xoviDE.png)
+
 ## Features
 When in "Whimsical Vision", this mod has many visual changes, many of which have config options:
 - Custom postprocessing shader
